@@ -65,6 +65,9 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "tsx src/index.ts",
     "watch": "tsx watch src/index.ts",
