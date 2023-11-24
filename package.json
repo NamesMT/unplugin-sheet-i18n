@@ -1,7 +1,7 @@
 {
   "name": "unplugin-sheet-i18n",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "packageManager": "pnpm@8.10.5",
   "description": "internalization with dsv, excel sheets, convert sheet to i18n-compatible json",
   "author": "NamesMT <dangquoctrung123@gmail.com>",
