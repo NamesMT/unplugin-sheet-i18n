@@ -69,8 +69,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "tsx src/index.ts",
-    "watch": "tsx watch src/index.ts",
+    "start": "NODE_ENV=dev tsx src/unplugin/index.ts",
+    "watch": "NODE_ENV=dev tsx watch src/unplugin/index.ts",
     "stub": "unbuild --stub",
     "dev": "pnpm run watch",
     "lint": "eslint .",
@@ -115,6 +115,7 @@
     "defu": "^6.1.3",
     "papaparse": "^5.4.1",
     "pino": "^8.16.2",
+    "std-env": "^3.5.0",
     "unplugin": "^1.5.1"
   },
   "devDependencies": {
