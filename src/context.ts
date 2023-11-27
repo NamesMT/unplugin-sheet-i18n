@@ -4,6 +4,7 @@ import defu from 'defu'
 import Papa from 'papaparse'
 import { createFilter } from 'vite'
 import { readFile, set_fs, utils } from '@e965/xlsx'
+import { process } from 'std-env'
 import { logger } from './logger'
 import type { Options } from './types'
 import { oGet, oSet } from './utils'
@@ -21,7 +22,7 @@ export const defaultOptions: Partial<Options> = {
   comments: '//',
 }
 
-export function createContext(options: Options = {}, root = process.cwd()) {
+export function createContext(options: Options = {}, root = process.cwd!()) {
   const resolvedOptions = defu(options, defaultOptions) as ResolvedOptions
 
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
