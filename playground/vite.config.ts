@@ -5,6 +5,8 @@ import SheetI18n from 'unplugin-sheet-i18n/vite'
 export default defineConfig({
   plugins: [
     Inspect(),
-    SheetI18n(),
+    SheetI18n({
+      outDir: 'test/otm/outDir/',
+    }),
   ],
 })

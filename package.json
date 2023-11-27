@@ -72,6 +72,7 @@
     "start": "NODE_ENV=dev tsx src/unplugin/index.ts",
     "watch": "NODE_ENV=dev tsx watch src/unplugin/index.ts",
     "stub": "unbuild --stub",
+    "play": "pnpm run stub && pnpm run --filter unplugin-sheet-i18n-playground dev",
     "dev": "pnpm run watch",
     "lint": "eslint .",
     "test": "vitest",
