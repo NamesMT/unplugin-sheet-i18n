@@ -27,9 +27,9 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
 
   const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir!) : null
-  const allowedExtensions = ['csv']
+  const allowedExtensions = ['.csv']
   if (resolvedOptions.xlsx)
-    allowedExtensions.push('xls', 'xlsx', 'xlsm', 'xlsb', 'ods')
+    allowedExtensions.push('.xls', '.xlsx', '.xlsm', '.xlsb', '.ods')
 
   async function init() {
     logger.info('[sheetI18n] Initializing...')
@@ -53,12 +53,12 @@ export function createContext(options: Options = {}, root = process.cwd()) {
   }
 
   async function convert(file: string) {
-    const [fileNamePath, extension] = split(file, file.lastIndexOf('.'), true)
+    const pathParsed = path.parse(file)
 
-    if (!allowedExtensions.includes(extension))
-      logger.error(`[sheetI18n] unexpected extension: ${file}`)
+    if (!allowedExtensions.includes(pathParsed.ext))
+      return logger.error(`[sheetI18n] unexpected extension: ${file}`)
 
-    const csvString = extension === 'csv'
+    const csvString = pathParsed.ext === 'csv'
       ? readCsvFile(file)
       : readXlsxFile(file)
 
@@ -66,7 +66,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
-      outputs[`${fileNamePath}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, resolvedOptions.valueProp)
+      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, resolvedOptions.valueProp)
     }
     else {
       const locales = parsed.meta.fields?.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
@@ -75,7 +75,7 @@ export function createContext(options: Options = {}, root = process.cwd()) {
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueProp?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(path.dirname(file), locale)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, locale)
+        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, locale)
       })
     }
 
@@ -161,8 +161,4 @@ function scanFiles(dir: string) {
     logger.error(`Error: ${(error as Error)?.message}`)
   }
   return files
-}
-
-function split(str: string, index: number, remove = false) {
-  return [str.slice(0, index), str.slice(remove ? index + 1 : index)]
 }
