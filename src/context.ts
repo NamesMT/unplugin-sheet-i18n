@@ -29,8 +29,9 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
   const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir!) : null
   const allowedExtensions = ['.csv']
+  const spreadsheetExtensions = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.ods']
   if (resolvedOptions.xlsx)
-    allowedExtensions.push('.xls', '.xlsx', '.xlsm', '.xlsb', '.ods')
+    allowedExtensions.push(...spreadsheetExtensions)
 
   async function init() {
     logger.info('[sheetI18n] Initializing...')
@@ -54,10 +55,12 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
   }
 
   async function convert(file: string) {
+    logger.info(`[sheetI18n] Processing: ${file.replace(`${root}/`, '')}`)
+
     const pathParsed = path.parse(file)
 
     if (!allowedExtensions.includes(pathParsed.ext))
-      return logger.error(`[sheetI18n] unexpected extension: ${file}`)
+      return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
 
     const csvString = pathParsed.ext === 'csv'
       ? readCsvFile(file)
