@@ -121,12 +121,19 @@ function readCsvFile(file: string) {
 function readXlsxFile(file: string) {
   const workbook = readFile(file)
 
-  let json: Record<string, any>[] = []
-  for (const sheet of Object.values(workbook.Sheets))
-    json = json.concat(utils.sheet_to_json(sheet))
+  const keys = new Set<string>()
+  let data: string[][] = []
+  for (const sheet of Object.values(workbook.Sheets)) {
+    const parsed = utils.sheet_to_json(sheet, { header: 1 })
+    const _keys = parsed.shift() as string[]
+    const _data = parsed
+
+    _keys.forEach(keys.add, keys)
+    data = data.concat(_data as string[])
+  }
 
   // const toCsv = utils.sheet_to_csv(utils.json_to_sheet(json), { FS: Papa.RECORD_SEP, RS: '\r\n' })
-  const toCsv = Papa.unparse(json, { delimiter: Papa.RECORD_SEP })
+  const toCsv = Papa.unparse([Array.from(keys)].concat(data), { delimiter: Papa.RECORD_SEP })
 
   return toCsv
 }
