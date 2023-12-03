@@ -133,7 +133,7 @@ function readXlsxFile(file: string) {
   }
 
   // const toCsv = utils.sheet_to_csv(utils.json_to_sheet(json), { FS: Papa.RECORD_SEP, RS: '\r\n' })
-  const toCsv = Papa.unparse([Array.from(keys)].concat(data), { delimiter: Papa.RECORD_SEP })
+  const toCsv = Papa.unparse({ fields: Array.from(keys), data }, { delimiter: Papa.RECORD_SEP })
 
   return toCsv
 }
