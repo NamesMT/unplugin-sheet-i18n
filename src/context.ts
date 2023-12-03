@@ -64,7 +64,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     const csvString = pathParsed.ext === 'csv'
       ? readCsvFile(file)
-      : readXlsxFile(file)
+      : readXlsxFile(file, { comments: resolvedOptions.comments })
 
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true, comments: resolvedOptions.comments })
 
@@ -115,10 +115,13 @@ function readCsvFile(file: string) {
   return fs.readFileSync(file).toString()
 }
 
+interface ReadXlsxFileOptions {
+  comments?: Options['comments']
+}
 /**
  * This function reads a xlsx file, combining all worksheets into one, convert and returns a csvString
  */
-function readXlsxFile(file: string) {
+function readXlsxFile(file: string, options: ReadXlsxFileOptions = {}) {
   const workbook = readFile(file)
 
   const keys = new Set<string>()
@@ -132,7 +135,17 @@ function readXlsxFile(file: string) {
     data = data.concat(_data as string[])
   }
 
-  const toCsv = Papa.unparse({ fields: Array.from(keys), data }, { delimiter: Papa.RECORD_SEP })
+  // Because of https://github.com/mholt/PapaParse/issues/1031 we need to do a manual filter on our side
+  const toCsv = Papa.unparse(
+    {
+      fields: Array.from(keys),
+      data: options.comments
+        // @ts-expect-error typescript bug options.comments might be undefined
+        ? data.filter(row => row[0] && !row[0].startsWith(options.comments))
+        : data,
+    },
+    { delimiter: Papa.RECORD_SEP },
+  )
 
   return toCsv
 }
