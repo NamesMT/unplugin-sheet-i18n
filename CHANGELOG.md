@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.2...v0.1.3)
+
+### 🩹 Fixes
+
+- `pino-pretty` not found ([b7b9a73](https://github.com/namesmt/unplugin-sheet-i18n/commit/b7b9a73))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.1.2
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.1...v0.1.2)
