@@ -121,31 +121,16 @@ interface ReadXlsxFileOptions {
 /**
  * This function reads a xlsx file, combining all worksheets into one, convert and returns a csvString
  */
-function readXlsxFile(file: string, options: ReadXlsxFileOptions = {}) {
+function readXlsxFile(file: string, _options: ReadXlsxFileOptions = {}) {
+  // options is no longer used because of v0.2.2 revert
+
   const workbook = readFile(file)
 
-  const keys = new Set<string>()
-  let data: string[][] = []
-  for (const sheet of Object.values(workbook.Sheets)) {
-    const parsed = utils.sheet_to_json(sheet, { header: 1 })
-    const _keys = parsed.shift() as string[]
-    const _data = parsed
+  let json: Record<string, any>[] = []
+  for (const sheet of Object.values(workbook.Sheets))
+    json = json.concat(utils.sheet_to_json(sheet))
 
-    _keys.forEach(keys.add, keys)
-    data = data.concat(_data as string[])
-  }
-
-  // Because of https://github.com/mholt/PapaParse/issues/1031 we need to do a manual filter on our side
-  const toCsv = Papa.unparse(
-    {
-      fields: Array.from(keys),
-      data: options.comments
-        // @ts-expect-error typescript bug options.comments might be undefined
-        ? data.filter(row => row[0] && !row[0].startsWith(options.comments))
-        : data,
-    },
-    { delimiter: Papa.RECORD_SEP },
-  )
+  const toCsv = utils.sheet_to_csv(utils.json_to_sheet(json), { FS: Papa.RECORD_SEP, RS: '\r\n' })
 
   return toCsv
 }
