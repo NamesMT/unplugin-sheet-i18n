@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.2.0
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.3...v0.2.0)
+
+### 💅 Refactors
+
+- ⚠️  Switch logger to `unjs/consola` ([e4e1852](https://github.com/namesmt/unplugin-sheet-i18n/commit/e4e1852))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Switch logger to `unjs/consola` ([e4e1852](https://github.com/namesmt/unplugin-sheet-i18n/commit/e4e1852))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.1.3
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.2...v0.1.3)
