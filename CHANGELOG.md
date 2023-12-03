@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.0...v0.2.1)
+
+### 🚀 Enhancements
+
+- Use `pathe` ([6fe7907](https://github.com/namesmt/unplugin-sheet-i18n/commit/6fe7907))
+- Log more info ([38ad3b4](https://github.com/namesmt/unplugin-sheet-i18n/commit/38ad3b4))
+- Use Papa.unparse for JSON to csvString ([a780a88](https://github.com/namesmt/unplugin-sheet-i18n/commit/a780a88))
+- Collect header keys ([#1](https://github.com/namesmt/unplugin-sheet-i18n/pull/1))
+- Implements a manual filter, ([#2](https://github.com/namesmt/unplugin-sheet-i18n/pull/2))
+
+### 💅 Refactors
+
+- Pass object for unparse instead of aoa ([f6be688](https://github.com/namesmt/unplugin-sheet-i18n/commit/f6be688))
+- Remove old commented code ([a4893ba](https://github.com/namesmt/unplugin-sheet-i18n/commit/a4893ba))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.2.0
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.3...v0.2.0)
