@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.2
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.1...v0.2.2)
+
+### 🩹 Fixes
+
+- Revert Papa.unparse() to sheetjs transforms (READ DESC) ([096a327](https://github.com/namesmt/unplugin-sheet-i18n/commit/096a327))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.2.1
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.0...v0.2.1)
