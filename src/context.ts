@@ -125,7 +125,8 @@ function readXlsxFile(file: string) {
   for (const sheet of Object.values(workbook.Sheets))
     json = json.concat(utils.sheet_to_json(sheet))
 
-  const toCsv = utils.sheet_to_csv(utils.json_to_sheet(json))
+  // const toCsv = utils.sheet_to_csv(utils.json_to_sheet(json), { FS: Papa.RECORD_SEP, RS: '\r\n' })
+  const toCsv = Papa.unparse(json, { delimiter: Papa.RECORD_SEP })
 
   return toCsv
 }
