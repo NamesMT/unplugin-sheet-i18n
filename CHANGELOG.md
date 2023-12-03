@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.1.1...v0.1.2)
+
+### 🩹 Fixes
+
+- IsColorSupported ([16f483a](https://github.com/namesmt/unplugin-sheet-i18n/commit/16f483a))
+
+### 🏡 Chore
+
+- Update deps ([b5c8894](https://github.com/namesmt/unplugin-sheet-i18n/commit/b5c8894))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.1.1
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.0.1...v0.1.1)
