@@ -22,6 +22,12 @@ export interface Options {
   outDir?: string
 
   /**
+   * Output file key style format
+   * @default 'flat'
+   */
+  keyStyle?: 'flat' | 'nested'
+
+  /**
    * Enable .xls[xmb]? and .ods support, multi-sheets is also supported,
    *
    * ie: sheetI18n will merge all sheets into one

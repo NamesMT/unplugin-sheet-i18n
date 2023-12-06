@@ -14,6 +14,7 @@ set_fs(fs)
 
 export const defaultOptions = {
   include: /(?:\/|\\|^)i18n.(?:csv)$/,
+  keyStyle: 'flat',
   keyProp: 'KEY',
   comments: '//',
 } satisfies Options
@@ -66,7 +67,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
-      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, resolvedOptions.valueProp)
+      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, resolvedOptions.valueProp, resolvedOptions.keyStyle)
     }
     else {
       const locales = parsed.meta.fields?.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
@@ -75,7 +76,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueProp?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, locale)
+        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, locale, resolvedOptions.keyStyle)
       })
     }
 
@@ -132,10 +133,15 @@ function readXlsxFile(file: string, _options: ReadXlsxFileOptions = {}) {
 }
 
 // Build a object based on an array of objects with provided key/value prop
-function transformToI18n(array: Record<any, any>[], key: string, value: string) {
+function transformToI18n(array: Record<any, any>[], key: string, value: string, keyStyle: Options['keyStyle']) {
   const obj = {} as Record<any, any>
   array.forEach((item) => {
-    oSet(obj, oGet(item, key), oGet(item, value))
+    const k = oGet(item, key)
+    const v = oGet(item, value)
+    if (keyStyle === 'nested')
+      oSet(obj, k, v)
+    else
+      obj[k] = v
   })
 
   return obj
