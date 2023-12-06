@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.0
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.2...v0.3.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Add keyStyle option ([4682dce](https://github.com/namesmt/unplugin-sheet-i18n/commit/4682dce))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Add keyStyle option ([4682dce](https://github.com/namesmt/unplugin-sheet-i18n/commit/4682dce))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.2.2
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.1...v0.2.2)
