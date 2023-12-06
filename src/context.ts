@@ -12,18 +12,14 @@ import { oGet, oSet } from './utils'
 // Enabling xlsx readFile support with set_fs
 set_fs(fs)
 
-interface ResolvedOptions extends Options {
-  include: NonNullable<Options['include']>
-  keyProp: NonNullable<Options['keyProp']>
-}
-export const defaultOptions: Partial<Options> = {
+export const defaultOptions = {
   include: /(?:\/|\\|^)i18n.(?:csv)$/,
   keyProp: 'KEY',
   comments: '//',
-}
+} satisfies Options
 
 export function createContext(options: Options = {}, root = process.cwd!()) {
-  const resolvedOptions = defu(options, defaultOptions) as ResolvedOptions
+  const resolvedOptions = defu(options, defaultOptions)
 
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
 
