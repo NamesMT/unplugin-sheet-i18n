@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.3.1
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.0...v0.3.1)
+
+### 🚀 Enhancements
+
+- Non-breaking error log for nested key exist ([b175a62](https://github.com/namesmt/unplugin-sheet-i18n/commit/b175a62))
+- Non-breaking log for undefined content write ([5e78ef9](https://github.com/namesmt/unplugin-sheet-i18n/commit/5e78ef9))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.3.0
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.2.2...v0.3.0)
