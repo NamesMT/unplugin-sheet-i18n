@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.2
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.1...v0.3.2)
+
+### 🩹 Fixes
+
+- Flat keyStyle breaking typo ([17df181](https://github.com/namesmt/unplugin-sheet-i18n/commit/17df181))
+
+### ❤️ Contributors
+
+- Trung Dang <trung.dangquoc@gameloft.com>
+
 ## v0.3.1
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.0...v0.3.1)
