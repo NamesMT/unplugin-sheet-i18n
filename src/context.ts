@@ -81,7 +81,10 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     }
 
     Object.entries(outputs).forEach(([path, content]) => {
-      fs.writeFileSync(path, JSON.stringify(content, undefined, 2))
+      if (!content)
+        logger.warn(`[sheetI18n] empty content for ${path}`)
+
+      fs.writeFileSync(path, content ? JSON.stringify(content, undefined, 2) : '')
     })
   }
 
