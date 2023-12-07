@@ -152,7 +152,7 @@ function transformToI18n(array: Record<any, any>[], key: string, value: string, 
         throw error
       }
     }
-    else { obj[ka] = v }
+    else { obj[k] = v }
   })
 
   return obj
