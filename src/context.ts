@@ -138,10 +138,18 @@ function transformToI18n(array: Record<any, any>[], key: string, value: string, 
   array.forEach((item) => {
     const k = oGet(item, key)
     const v = oGet(item, value)
-    if (keyStyle === 'nested')
-      oSet(obj, k, v)
-    else
-      obj[k] = v
+    if (keyStyle === 'nested') {
+      try {
+        oSet(obj, k, v)
+      }
+      catch (error) {
+        if (error instanceof TypeError && error.message.match(/^Cannot create property '.+'? on string/))
+          return logger.error(`[sheetI18n] nested key exist: '${k}', consider using flat keyStyle.`)
+
+        throw error
+      }
+    }
+    else { obj[ka] = v }
   })
 
   return obj
