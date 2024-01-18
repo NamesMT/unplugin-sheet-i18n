@@ -59,11 +59,24 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     if (!allowedExtensions.includes(pathParsed.ext))
       return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
 
-    const csvString = pathParsed.ext === 'csv'
+    let csvString = pathParsed.ext === 'csv'
       ? readCsvFile(file)
-      : readXlsxFile(file, { comments: resolvedOptions.comments })
+      : readXlsxFile(file)
 
-    const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true, comments: resolvedOptions.comments })
+    if (resolvedOptions.comments) {
+      if (!Array.isArray(resolvedOptions.comments))
+        resolvedOptions.comments = [resolvedOptions.comments] as string[]
+
+      const splittedCsvString = csvString.split('\r\n')
+      csvString = splittedCsvString.filter(
+        txt => !(resolvedOptions.comments as string[]).some((needle) => {
+          const RE = new RegExp(`^"?${needle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&')}`)
+          return txt.match(RE)
+        }),
+      ).join('\r\n')
+    }
+
+    const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
@@ -116,7 +129,6 @@ function readCsvFile(file: string) {
 }
 
 interface ReadXlsxFileOptions {
-  comments?: Options['comments']
 }
 /**
  * This function reads a xlsx file, combining all worksheets into one, convert and returns a csvString

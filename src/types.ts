@@ -1,4 +1,3 @@
-import type { ParseConfig } from 'papaparse'
 import type { FilterPattern } from 'vite'
 
 export interface Options {
@@ -55,5 +54,5 @@ export interface Options {
    * When the parser encounters a line starting with this string, it will skip the line.
    * @default '//'
    */
-  comments?: ParseConfig['comments']
+  comments?: false | string | string[]
 }
