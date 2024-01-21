@@ -59,10 +59,12 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     if (!allowedExtensions.includes(pathParsed.ext))
       return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
 
+    // Read the file and convert to a csv string
     let csvString = pathParsed.ext === 'csv'
       ? readCsvFile(file)
       : readXlsxFile(file)
 
+    // Filter out comment rows
     if (resolvedOptions.comments) {
       if (!Array.isArray(resolvedOptions.comments))
         resolvedOptions.comments = [resolvedOptions.comments] as string[]
@@ -76,11 +78,23 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       ).join('\r\n')
     }
 
+    // Parse to json and do a simple filter for keyProp, skipping rows without a defined key.
+    let emptyKeySkipped = 0
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
+    const parsedData = parsed.data.filter((row) => {
+      if (Boolean(row[resolvedOptions.keyProp]) && row[resolvedOptions.keyProp] !== '""')
+        return true
+
+      ++emptyKeySkipped
+      return false
+    })
+
+    if (emptyKeySkipped)
+      logger.info(`[sheetI18n] ${emptyKeySkipped} rows with empty key skipped`)
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
-      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, resolvedOptions.valueProp, resolvedOptions.keyStyle)
+      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyProp, resolvedOptions.valueProp, resolvedOptions.keyStyle)
     }
     else {
       const locales = parsed.meta.fields?.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
@@ -89,7 +103,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueProp?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsed.data, resolvedOptions.keyProp, locale, resolvedOptions.keyStyle)
+        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyProp, locale, resolvedOptions.keyStyle)
       })
     }
 
