@@ -52,7 +52,9 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
   }
 
   async function convert(file: string) {
-    logger.info(`[sheetI18n] Processing: ${file.replace(`${root}/`, '')}`)
+    const relativePath = file.replace(`${root}/`, '')
+
+    logger.info(`[sheetI18n] Processing: ${relativePath}`)
 
     const pathParsed = path.parse(file)
 
@@ -90,7 +92,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     })
 
     if (emptyKeySkipped)
-      logger.info(`[sheetI18n] ${emptyKeySkipped} rows with empty key skipped`)
+      logger.info(`[sheetI18n] ${relativePath}: ${emptyKeySkipped} rows with empty key skipped`)
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
