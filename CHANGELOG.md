@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.3.4
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.3...v0.3.4)
+
+### 🚀 Enhancements
+
+- Skip rows with empty key, add some comments ([5b714d6](https://github.com/namesmt/unplugin-sheet-i18n/commit/5b714d6))
+- Improve log with filename ([7b496d6](https://github.com/namesmt/unplugin-sheet-i18n/commit/7b496d6))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.3.3
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.2...v0.3.3)
