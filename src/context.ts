@@ -84,7 +84,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     let emptyKeySkipped = 0
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
     const parsedData = parsed.data.filter((row) => {
-      if (Boolean(row[resolvedOptions.keyProp]) && row[resolvedOptions.keyProp] !== '""')
+      if (!isEmptyCell(row[resolvedOptions.keyProp]))
         return true
 
       ++emptyKeySkipped
@@ -169,6 +169,11 @@ function transformToI18n(array: Record<any, any>[], key: string, value: string, 
   array.forEach((item) => {
     const k = objectGet(item, key)
     const v = objectGet(item, value)
+
+    // Skip cells with empty value for a proper fallback
+    if (isEmptyCell(v))
+      return
+
     if (keyStyle === 'nested') {
       try {
         objectSet(obj, k, v)
@@ -186,7 +191,13 @@ function transformToI18n(array: Record<any, any>[], key: string, value: string, 
   return obj
 }
 
-// Took from: vHeemstra/vite-plugin-imagemin
+function isEmptyCell(cellValue: string, quoteChar?: string = '"') {
+  return !cellValue || (
+    quoteChar && cellValue === quoteChar.repeat(2)
+  )
+}
+
+// CREDIT: took from somewhere in vHeemstra/vite-plugin-imagemin
 function scanFiles(dir: string) {
   let files: string[] = []
   try {

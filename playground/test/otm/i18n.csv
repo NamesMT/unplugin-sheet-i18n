@@ -1,4 +1,3 @@
-KEY,DESCRIPTION,EN
+KEY,DESCRIPTION,en,vi
 hello,,Hello There!
-,a,b
-,c,d
+hello2,,Hello There!,Exists
