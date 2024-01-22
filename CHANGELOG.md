@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.5
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.4...v0.3.5)
+
+### 🩹 Fixes
+
+- **transformToI18n:** Skip empty value rows, fixes #3 ([#3](https://github.com/namesmt/unplugin-sheet-i18n/issues/3))
+
+### 💅 Refactors
+
+- Uses some common utils function from `@namesmt/utils` ([30ef9f2](https://github.com/namesmt/unplugin-sheet-i18n/commit/30ef9f2))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.3.4
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.3...v0.3.4)
