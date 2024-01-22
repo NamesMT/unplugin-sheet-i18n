@@ -122,6 +122,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.2.1",
+    "@namesmt/utils": "^0.2.4",
     "@nuxt/kit": "^3.8.2",
     "@nuxt/schema": "^3.8.2",
     "@types/node": "^20.10.2",

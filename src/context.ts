@@ -5,9 +5,9 @@ import Papa from 'papaparse'
 import { createFilter } from 'vite'
 import { readFile, set_fs, utils } from '@e965/xlsx'
 import { process } from 'std-env'
+import { objectGet, objectSet } from '@namesmt/utils'
 import { logger } from './logger'
 import type { Options } from './types'
-import { oGet, oSet } from './utils'
 
 // Enabling xlsx readFile support with set_fs
 set_fs(fs)
@@ -167,11 +167,11 @@ function readXlsxFile(file: string, _options: ReadXlsxFileOptions = {}) {
 function transformToI18n(array: Record<any, any>[], key: string, value: string, keyStyle: Options['keyStyle']) {
   const obj = {} as Record<any, any>
   array.forEach((item) => {
-    const k = oGet(item, key)
-    const v = oGet(item, value)
+    const k = objectGet(item, key)
+    const v = objectGet(item, value)
     if (keyStyle === 'nested') {
       try {
-        oSet(obj, k, v)
+        objectSet(obj, k, v)
       }
       catch (error) {
         if (error instanceof TypeError && error.message.match(/^Cannot create property '.+'? on string/))
