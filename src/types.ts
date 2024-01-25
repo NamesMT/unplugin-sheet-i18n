@@ -38,15 +38,16 @@ export interface Options {
    * Column name to use as key/id
    * @default 'KEY'
    */
-  keyProp?: string
+  keyColumn?: string
 
   /**
    * By default sheetI18n will automatically parses and output fileName as localeId-alike columns (en, FR, vi-VN...),
    *
-   * Defining a valueProp will uses that column as value and output as same input fileName.
+   * Defining a valueColumn will uses that column as value and output as same input fileName: `ha.csv => ha.json`
+   *
    * @default undefined
    */
-  valueProp?: string
+  valueColumn?: string
 
   /**
    * A string that indicates a comment (for example, "#" or "//").

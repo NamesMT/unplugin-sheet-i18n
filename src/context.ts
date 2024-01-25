@@ -16,7 +16,7 @@ set_fs(fs)
 export const defaultOptions = {
   include: /(?:\/|\\|^)i18n.(?:csv)$/,
   keyStyle: 'flat',
-  keyProp: 'KEY',
+  keyColumn: 'KEY',
   comments: '//',
   jsonProcessorClean: true,
 } satisfies Options
@@ -82,12 +82,12 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       ).join('\r\n')
     }
 
-    // Parse to json and do a simple filter for keyProp, skipping rows without a defined key.
+    // Parse to json and do a simple filter for keyColumn, skipping rows without a defined key.
     let emptyKeySkipped = 0
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
     const locales = parsed.meta.fields!.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
     let parsedData = parsed.data.filter((row) => {
-      if (!isEmptyCell(row[resolvedOptions.keyProp]))
+      if (!isEmptyCell(row[resolvedOptions.keyColumn]))
         return true
 
       ++emptyKeySkipped
@@ -106,15 +106,15 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     }
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
-    if (resolvedOptions.valueProp) {
-      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyProp, resolvedOptions.valueProp, resolvedOptions.keyStyle)
+    if (resolvedOptions.valueColumn) {
+      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle)
     }
     else {
       if (!locales?.length)
-        return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueProp?')
+        return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueColumn?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyProp, locale, resolvedOptions.keyStyle)
+        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle)
       })
     }
 
@@ -142,7 +142,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     const jsons: any = {}
     // eslint-disable-next-line array-callback-return
     const filtered = data.filter((row) => {
-      const keyCell: string = row[resolvedOptions.keyProp!]
+      const keyCell: string = row[resolvedOptions.keyColumn!]
       if (!keyCell.startsWith('$JSON;'))
         return true
 
