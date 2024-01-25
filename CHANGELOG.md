@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.6
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.5...v0.3.6)
+
+### 🚀 Enhancements
+
+- Implements `jsonProcessor` ([328fba0](https://github.com/namesmt/unplugin-sheet-i18n/commit/328fba0))
+
+### 🩹 Fixes
+
+- **build:** Allow inline devDependencies ([7bf7ab1](https://github.com/namesmt/unplugin-sheet-i18n/commit/7bf7ab1))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.3.5
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.4...v0.3.5)
