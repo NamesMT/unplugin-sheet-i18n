@@ -7,6 +7,7 @@ export default defineConfig({
     Inspect(),
     SheetI18n({
       outDir: 'test/otm/outDir/',
+      jsonProcessor: true,
     }),
   ],
 })

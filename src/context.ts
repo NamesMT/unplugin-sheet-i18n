@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+import type { ParsedPath } from 'node:path'
 import path from 'pathe'
 import defu from 'defu'
 import Papa from 'papaparse'
@@ -17,6 +18,7 @@ export const defaultOptions = {
   keyStyle: 'flat',
   keyProp: 'KEY',
   comments: '//',
+  jsonProcessorClean: true,
 } satisfies Options
 
 export function createContext(options: Options = {}, root = process.cwd!()) {
@@ -83,7 +85,8 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     // Parse to json and do a simple filter for keyProp, skipping rows without a defined key.
     let emptyKeySkipped = 0
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
-    const parsedData = parsed.data.filter((row) => {
+    const locales = parsed.meta.fields!.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
+    let parsedData = parsed.data.filter((row) => {
       if (!isEmptyCell(row[resolvedOptions.keyProp]))
         return true
 
@@ -94,13 +97,19 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     if (emptyKeySkipped)
       logger.info(`[sheetI18n] ${relativePath}: ${emptyKeySkipped} rows with empty key skipped`)
 
+    // jsonProcessor
+    if (resolvedOptions.jsonProcessor) {
+      const filtered = _jsonProcessor({ data: parsedData, relativePath, pathParsed, locales })
+
+      if (resolvedOptions.jsonProcessorClean)
+        parsedData = filtered
+    }
+
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueProp) {
       outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyProp, resolvedOptions.valueProp, resolvedOptions.keyStyle)
     }
     else {
-      const locales = parsed.meta.fields?.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
-
       if (!locales?.length)
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueProp?')
 
@@ -121,6 +130,64 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     const files = scanFiles(root).filter(filter)
     for (const file of files)
       await convert(file)
+  }
+
+  interface _JsonProcessorProps {
+    data: Record<any, any>[]
+    pathParsed: ParsedPath
+    relativePath: string
+    locales: string[]
+  }
+  function _jsonProcessor({ data, relativePath, pathParsed, locales }: _JsonProcessorProps) {
+    const jsons: any = {}
+    // eslint-disable-next-line array-callback-return
+    const filtered = data.filter((row) => {
+      const keyCell: string = row[resolvedOptions.keyProp!]
+      if (!keyCell.startsWith('$JSON;'))
+        return true
+
+      if (!locales.length)
+        return false
+
+      const parseCell: any[] = keyCell.replace(/^\$JSON;/, '').split(';')
+
+      if (parseCell.length !== 4 || !parseCell.every(Boolean))
+        return logger.error(`[sheetI18n] ${relativePath}: Invalid $JSON cell: ${keyCell}`)
+
+      const rawSelectors = parseCell[1]
+      parseCell[1] = rawSelectors.split(',').map((v: string) => v.split(':'))
+
+      const [id, selectors, path, key] = parseCell
+
+      const selectorKeys = selectors.map((v: [string, string]) => v[0])
+
+      if (!jsons[id]?.[rawSelectors]) {
+        objectSet(jsons, [id, rawSelectors], {
+          __selectorKeys: selectorKeys,
+        })
+      }
+
+      const obj = jsons[id][rawSelectors]
+
+      selectors.forEach(([k, v]: string[]) => {
+        objectSet(obj, k, v)
+      })
+
+      locales.forEach((locale) => {
+        const value = objectGet(row, locale)
+
+        objectSet(obj, [...path.split('.'), 'i18n', locale, key], value)
+      })
+    })
+
+    if (Object.keys(jsons).length) {
+      Object.keys(jsons).forEach((k) => {
+        fs.writeFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
+      })
+      logger.info(`[sheetI18n] ${relativePath}: Special $JSON keys processed`)
+    }
+
+    return filtered
   }
 
   return {
@@ -163,12 +230,12 @@ function readXlsxFile(file: string, _options: ReadXlsxFileOptions = {}) {
   return toCsv
 }
 
-// Build a object based on an array of objects with provided key/value prop
-function transformToI18n(array: Record<any, any>[], key: string, value: string, keyStyle: Options['keyStyle']) {
+// Build a object based on an array of objects with provided key/value column
+function transformToI18n(array: Record<any, any>[], keyCol: string, valueCol: string, keyStyle: Options['keyStyle']) {
   const obj = {} as Record<any, any>
   array.forEach((item) => {
-    const k = objectGet(item, key)
-    const v = objectGet(item, value)
+    const k = objectGet(item, keyCol)
+    const v = objectGet(item, valueCol)
 
     // Skip cells with empty value for a proper fallback
     if (isEmptyCell(v))
@@ -191,7 +258,7 @@ function transformToI18n(array: Record<any, any>[], key: string, value: string, 
   return obj
 }
 
-function isEmptyCell(cellValue: string, quoteChar?: string = '"') {
+function isEmptyCell(cellValue: string, quoteChar: string = '"') {
   return !cellValue || (
     quoteChar && cellValue === quoteChar.repeat(2)
   )
