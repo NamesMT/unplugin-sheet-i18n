@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.4.0
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.6...v0.4.0)
+
+### 🚀 Enhancements
+
+- **utils:** Add `outputFileSync()` ([e2ca459](https://github.com/namesmt/unplugin-sheet-i18n/commit/e2ca459))
+- Implements `fileProcessor` ([d0a63ab](https://github.com/namesmt/unplugin-sheet-i18n/commit/d0a63ab))
+
+### 🩹 Fixes
+
+- **jsonProcessor:** Shouldn't create prop if value is empty, allowing proper fallback ([f7c8388](https://github.com/namesmt/unplugin-sheet-i18n/commit/f7c8388))
+
+### 💅 Refactors
+
+- ⚠️  Change wording from `abcProp` to `abcColumn` ([118f453](https://github.com/namesmt/unplugin-sheet-i18n/commit/118f453))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Change wording from `abcProp` to `abcColumn` ([118f453](https://github.com/namesmt/unplugin-sheet-i18n/commit/118f453))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.3.6
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.5...v0.3.6)
