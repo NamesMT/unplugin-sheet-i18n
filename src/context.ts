@@ -175,7 +175,10 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       })
 
       locales.forEach((locale) => {
-        const value = objectGet(row, locale)
+        const value = row[locale]
+
+        if (!value)
+          return
 
         objectSet(obj, [...path.split('.'), 'i18n', locale, key], value)
       })
