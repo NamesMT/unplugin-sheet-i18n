@@ -8,6 +8,7 @@ export default defineConfig({
     SheetI18n({
       outDir: 'test/otm/outDir/',
       jsonProcessor: true,
+      fileProcessor: true,
     }),
   ],
 })

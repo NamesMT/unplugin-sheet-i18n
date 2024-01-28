@@ -20,6 +20,7 @@ export const defaultOptions = {
   keyColumn: 'KEY',
   comments: '//',
   jsonProcessorClean: true,
+  fileProcessorClean: true,
 } satisfies Options
 
 export function createContext(options: Options = {}, root = process.cwd!()) {
@@ -98,11 +99,20 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     if (emptyKeySkipped)
       logger.info(`[sheetI18n] ${relativePath}: ${emptyKeySkipped} rows with empty key skipped`)
 
+    // TODO: minor: optimize special processors to use a same filter pass
     // jsonProcessor
     if (resolvedOptions.jsonProcessor) {
       const filtered = _jsonProcessor({ data: parsedData, relativePath, pathParsed, locales })
 
       if (resolvedOptions.jsonProcessorClean)
+        parsedData = filtered
+    }
+
+    // fileProcessor
+    if (resolvedOptions.fileProcessor) {
+      const filtered = _fileProcessor({ data: parsedData, relativePath, pathParsed, locales })
+
+      if (resolvedOptions.fileProcessorClean)
         parsedData = filtered
     }
 
@@ -189,6 +199,50 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
         outputFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $JSON keys processed`)
+    }
+
+    return filtered
+  }
+
+  interface _FileProcessorProps {
+    data: Record<any, any>[]
+    pathParsed: ParsedPath
+    relativePath: string
+    locales: string[]
+  }
+  function _fileProcessor({ data, relativePath, pathParsed, locales }: _FileProcessorProps) {
+    const files: any = {}
+    // eslint-disable-next-line array-callback-return
+    const filtered = data.filter((row) => {
+      const keyCell: string = row[resolvedOptions.keyColumn!]
+      if (!keyCell.startsWith('$FILE;'))
+        return true
+
+      if (!locales.length)
+        return false
+
+      const parseCell: any[] = keyCell.replace(/^\$FILE;/, '').split(';')
+
+      if (parseCell.length < 1 || parseCell.length > 2 || !parseCell.every(Boolean))
+        return logger.error(`[sheetI18n] ${relativePath}: Invalid $FILE cell: ${keyCell}`)
+
+      const [filepath, extension = 'txt'] = parseCell
+
+      locales.forEach((locale) => {
+        const value = row[locale]
+
+        if (!value)
+          return
+
+        objectSet(files, [`${filepath}_${locale}.${extension}`], value)
+      })
+    })
+
+    if (Object.keys(files).length) {
+      Object.keys(files).forEach((k) => {
+        outputFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}`, files[k])
+      })
+      logger.info(`[sheetI18n] ${relativePath}: Special $FILE keys processed`)
     }
 
     return filtered

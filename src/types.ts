@@ -75,4 +75,23 @@ export interface Options {
    * @default true
    */
   jsonProcessorClean?: boolean
+
+  /**
+   * // TODO: documents this
+   * Enables special processing for $FILE keys
+   *
+   * jsonProcessor will always work in auto locale columns mode, and exported file will be 'flat'
+   *
+   * @default false
+   */
+  fileProcessor?: boolean
+
+  /**
+   * Filter $FILE keys from the normal processing logic
+   *
+   * Effective only if `fileProcessor` is enabled
+   *
+   * @default true
+   */
+  fileProcessorClean?: boolean
 }
