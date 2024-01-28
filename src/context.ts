@@ -9,6 +9,7 @@ import { process } from 'std-env'
 import { objectGet, objectSet } from '@namesmt/utils'
 import { logger } from './logger'
 import type { Options } from './types'
+import { outputFileSync } from './utils'
 
 // Enabling xlsx readFile support with set_fs
 set_fs(fs)
@@ -182,7 +183,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     if (Object.keys(jsons).length) {
       Object.keys(jsons).forEach((k) => {
-        fs.writeFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
+        outputFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $JSON keys processed`)
     }
