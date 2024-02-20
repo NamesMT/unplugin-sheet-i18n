@@ -9,7 +9,7 @@ import { process } from 'std-env'
 import { objectGet, objectSet } from '@namesmt/utils'
 import { logger } from './logger'
 import type { Options } from './types'
-import { outputFileSync } from './utils'
+import { outputFileSync, outputWriteMerge } from './utils'
 
 // Enabling xlsx readFile support with set_fs
 set_fs(fs)
@@ -19,6 +19,7 @@ export const defaultOptions = {
   keyStyle: 'flat',
   keyColumn: 'KEY',
   comments: '//',
+  mergeOutput: true,
   jsonProcessorClean: true,
   fileProcessorClean: true,
 } satisfies Options
@@ -133,7 +134,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       if (!content)
         logger.warn(`[sheetI18n] empty content for ${path}`)
 
-      fs.writeFileSync(path, content ? JSON.stringify(content, undefined, 2) : '')
+      ;(resolvedOptions.mergeOutput ? outputWriteMerge : outputFileSync)(path, content ? JSON.stringify(content, undefined, 2) : '')
     })
   }
 

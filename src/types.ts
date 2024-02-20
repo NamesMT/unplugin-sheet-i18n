@@ -58,6 +58,13 @@ export interface Options {
   comments?: false | string | string[]
 
   /**
+   * Merge json output of processed files (if they output to same file)
+   *
+   * @default true
+   */
+  mergeOutput?: boolean
+
+  /**
    * // TODO: documents this
    * Enables special processing for $JSON keys
    *

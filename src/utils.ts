@@ -38,3 +38,24 @@ export function outputFileSync(
   // Write the file
   fs.writeFileSync(filepath, data, options)
 }
+
+const mergeStore: Record<string, boolean> = {}
+/**
+ * Wrapper for `outputFileSync()` that will do a normal write the first time the file is encountered in the node process, and `mergeContent` for future writes
+ */
+export function outputWriteMerge(
+  filepath: string,
+  data: string | NodeJS.ArrayBufferView,
+  options?: Exclude<WriteFileOptions, BufferEncoding> & {
+    /**
+     * Perform a json deep merge if file already exists
+     * Explicitly set to `true` if you want to perform a simple concatenate for other file types
+     */
+    mergeContent?: boolean | 'json'
+  },
+) {
+  const allowMerge = Boolean(mergeStore[filepath])
+  mergeStore[filepath] = true
+
+  return outputFileSync(filepath, data, { ...options, mergeContent: allowMerge && (options?.mergeContent ?? true) })
+}
