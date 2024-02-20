@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.2
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.1...v0.4.2)
+
+### 🚀 Enhancements
+
+- Implements `replacePunctuationSpace`, enabled by default ([7950dda](https://github.com/namesmt/unplugin-sheet-i18n/commit/7950dda))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.1
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.0...v0.4.1)
