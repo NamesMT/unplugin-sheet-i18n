@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.4.1
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.0...v0.4.1)
+
+### 🚀 Enhancements
+
+- **outputFileSync:** Implements `mergeContent` ([da2636e](https://github.com/namesmt/unplugin-sheet-i18n/commit/da2636e))
+- Now merge json output by default ([c6c7d35](https://github.com/namesmt/unplugin-sheet-i18n/commit/c6c7d35))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.0
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.3.6...v0.4.0)
