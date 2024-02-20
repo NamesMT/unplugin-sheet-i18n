@@ -1,4 +1,5 @@
 KEY,DESCRIPTION,en,vi
+frenchSpaceStyle,,Bonjour !
 hello2,,Hello There!,Exists
 $JSON;FAQ;sort:overview;data;name,,Halo
 $FILE;files/ok;html,,Halo,Ei

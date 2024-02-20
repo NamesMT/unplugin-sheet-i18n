@@ -9,7 +9,7 @@ import { process } from 'std-env'
 import { objectGet, objectSet } from '@namesmt/utils'
 import { logger } from './logger'
 import type { Options } from './types'
-import { outputFileSync, outputWriteMerge } from './utils'
+import { outputFileSync, outputWriteMerge, replacePunctuationSpace } from './utils'
 
 // Enabling xlsx readFile support with set_fs
 set_fs(fs)
@@ -20,6 +20,7 @@ export const defaultOptions = {
   keyColumn: 'KEY',
   comments: '//',
   mergeOutput: true,
+  replacePunctuationSpace: true,
   jsonProcessorClean: true,
   fileProcessorClean: true,
 } satisfies Options
@@ -119,14 +120,14 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueColumn) {
-      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle)
+      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle, resolvedOptions)
     }
     else {
       if (!locales?.length)
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueColumn?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle)
+        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle, resolvedOptions)
       })
     }
 
@@ -191,7 +192,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
         if (!value)
           return
 
-        objectSet(obj, [...path.split('.'), 'i18n', locale, key], value)
+        objectSet(obj, [...path.split('.'), 'i18n', locale, key], resolvedOptions.replacePunctuationSpace ? replacePunctuationSpace(value) : value)
       })
     })
 
@@ -235,7 +236,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
         if (!value)
           return
 
-        objectSet(files, [`${filepath}_${locale}.${extension}`], value)
+        objectSet(files, [`${filepath}_${locale}.${extension}`], resolvedOptions.replacePunctuationSpace ? replacePunctuationSpace(value) : value)
       })
     })
 
@@ -290,11 +291,11 @@ function readXlsxFile(file: string, _options: ReadXlsxFileOptions = {}) {
 }
 
 // Build a object based on an array of objects with provided key/value column
-function transformToI18n(array: Record<any, any>[], keyCol: string, valueCol: string, keyStyle: Options['keyStyle']) {
+function transformToI18n(array: Record<any, any>[], keyCol: string, valueCol: string, keyStyle: Options['keyStyle'], options: { replacePunctuationSpace?: boolean } = {}) {
   const obj = {} as Record<any, any>
   array.forEach((item) => {
     const k = objectGet(item, keyCol)
-    const v = objectGet(item, valueCol)
+    const v = options.replacePunctuationSpace ? replacePunctuationSpace(objectGet(item, valueCol)) : objectGet(item, valueCol)
 
     // Skip cells with empty value for a proper fallback
     if (isEmptyCell(v))

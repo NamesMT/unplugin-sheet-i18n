@@ -59,3 +59,7 @@ export function outputWriteMerge(
 
   return outputFileSync(filepath, data, { ...options, mergeContent: allowMerge && (options?.mergeContent ?? true) })
 }
+
+export function replacePunctuationSpace(str: string) {
+  return str.replaceAll(/ ([!$%:;?+-])/g, '\xA0$1')
+}

@@ -65,6 +65,15 @@ export interface Options {
   mergeOutput?: boolean
 
   /**
+   * Replaces all spaces followed by a "high" punctuation with a non-breaking space, this is useful to fix ugly UI wrapping for cases like French that requires a space before the punctuations.
+   *
+   * Punctuations currently scan for is: !$%:;?+-
+   *
+   * @default true
+   */
+  replacePunctuationSpace?: boolean
+
+  /**
    * // TODO: documents this
    * Enables special processing for $JSON keys
    *
