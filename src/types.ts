@@ -74,8 +74,40 @@ export interface Options {
   replacePunctuationSpace?: boolean
 
   /**
-   * // TODO: documents this
    * Enables special processing for $JSON keys
+   *
+   * Key syntax: `$JSON;[fileName];[selectors];[path];[key]`  
+   * 
+   * Example:
+   * ```txt
+   * For a key:
+   * $JSON;cloud;id:what;a.nested.path;display - What?
+   * 
+   * We will get a file: cloud_[locale] with the content:
+   * """
+   * [
+   *  {
+   *    "__selectorKeys": [
+   *      "id"
+   *    ],
+   *    "id": "what",
+   *    "a": {
+   *      "nested": {
+   *        "path": {
+   *          "i18n": {
+   *            "en": {
+   *              "display": "What?"
+   *            }
+   *          }
+   *        }
+   *      }
+   *    }
+   *  }
+   * ]
+   * """
+   * ```
+   *
+   * //TODO: add util for checking an object againts the outputted JSON array, util to load the internalization text from the outputted format
    *
    * jsonProcessor will always work in auto locale columns mode, and exported file will be 'flat'
    *
@@ -93,10 +125,18 @@ export interface Options {
   jsonProcessorClean?: boolean
 
   /**
-   * // TODO: documents this
    * Enables special processing for $FILE keys
-   *
-   * jsonProcessor will always work in auto locale columns mode, and exported file will be 'flat'
+   * 
+   * Key syntax: `$FILE;[fileName];[extension]`,  
+   * extension is optional and defaults to 'txt'  
+   * 
+   * Example:
+   * ```txt
+   * For a key:
+   * $FILE;hi_there;md - Halo
+   * 
+   * We will get a file: hi_there_[locale].md with the content: "Halo"
+   * ```
    *
    * @default false
    */

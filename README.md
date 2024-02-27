@@ -3,12 +3,16 @@
 **unplugin-sheet-i18n** enables doing your i18n in a [spread]sheet for a better collaborative experience with non-coders and maintainability.
 
 ## Features
-- CSV, DSV, Spreadsheets (XLS[XMB], ODT) parsing, powered by [SheetJS](https://sheetjs.com/) and [papaparse](https://www.papaparse.com/)
-- File-to-file convert (en.csv -> en.json)
-- File-to-multiple convert (i18n.csv -> en.json, vi.json, fr.json,...)
-- Multiple sheets support (for big projects)
+- Supports CSV, DSV, Excel/Spreadsheets (XLS[XMB], ODT), powered by [SheetJS](https://sheetjs.com/) and [papaparse](https://www.papaparse.com/)
+- File-to-file convert: `en.csv -> en.json`
+- File-to-multiple convert: `i18n.csv -> en.json, vi.json, fr.json,...`
+- Output merging: `i18n_a.csv + i18n_b.csv -> en.json`
+- File generation: `i18n_files.csv -> cloud_en.json, cloud_fr.json, template_en.html, template_fr.html`
+- And more!
 
 ## Usage
+[>See a few examples usage here<](./playground)
+
 ### Install package:
 ```sh
 # npm
