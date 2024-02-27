@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.3
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.2...v0.4.3)
+
+### 📖 Documentation
+
+- Update README and Options's type document ([04b1e1e](https://github.com/namesmt/unplugin-sheet-i18n/commit/04b1e1e))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.2
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.1...v0.4.2)
