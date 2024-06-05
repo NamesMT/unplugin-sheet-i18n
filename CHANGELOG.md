@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.4.4
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.3...v0.4.4)
+
+### 🏡 Chore
+
+- Update deps ([529475e](https://github.com/namesmt/unplugin-sheet-i18n/commit/529475e))
+- Update eslint config ([fc30f2c](https://github.com/namesmt/unplugin-sheet-i18n/commit/fc30f2c))
+
+### 🎨 Styles
+
+- Apply lint fixes ([3df85d6](https://github.com/namesmt/unplugin-sheet-i18n/commit/3df85d6))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.3
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.2...v0.4.3)
