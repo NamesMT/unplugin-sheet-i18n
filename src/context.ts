@@ -15,7 +15,8 @@ import { outputFileSync, outputWriteMerge, replacePunctuationSpace } from './uti
 set_fs(fs)
 
 export const defaultOptions = {
-  include: /(?:\/|\\|^)i18n.(?:csv)$/,
+  // eslint-disable-next-line regexp/no-useless-non-capturing-group
+  include: /(?:\/|\\|^)i18n\.(?:csv)$/,
   keyStyle: 'flat',
   keyColumn: 'KEY',
   comments: '//',
@@ -80,6 +81,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       const splittedCsvString = csvString.split('\r\n')
       csvString = splittedCsvString.filter(
         txt => !(resolvedOptions.comments as string[]).some((needle) => {
+          // eslint-disable-next-line regexp/prefer-character-class, regexp/no-obscure-range
           const RE = new RegExp(`^"?${needle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&')}`)
           return txt.match(RE)
         }),
@@ -306,7 +308,7 @@ function transformToI18n(array: Record<any, any>[], keyCol: string, valueCol: st
         objectSet(obj, k, v)
       }
       catch (error) {
-        if (error instanceof TypeError && error.message.match(/^Cannot create property '.+'? on string/))
+        if (error instanceof TypeError && error.message.match(/^Cannot create property '.+ on string/))
           return logger.error(`[sheetI18n] nested key exist: '${k}', consider using flat keyStyle.`)
 
         throw error

@@ -58,7 +58,6 @@ export default {
 
 <br></details>
 
-
 <details>
 <summary>Webpack</summary><br>
 
@@ -123,7 +122,6 @@ build({
 
 ### Options:
 [See Options](./src/types.ts)
-
 
 ## Roadmap
 

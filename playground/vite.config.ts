@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     Inspect(),
     SheetI18n({
-      include: /(?:\/|\\|^)i18n\w*?\.(?:csv)$/,
+      include: /(?:\/|\\|^)i18n\w*\.csv$/,
       outDir: 'test/otm/outDir/',
       jsonProcessor: true,
       fileProcessor: true,
