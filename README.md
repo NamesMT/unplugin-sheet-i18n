@@ -1,4 +1,10 @@
-# unplugin-sheet-i18n [![NPM version](https://img.shields.io/npm/v/unplugin-sheet-i18n?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-sheet-i18n)
+# unplugin-sheet-i18n ![TypeScript heart icon](https://img.shields.io/badge/♡-%23007ACC.svg?logo=typescript&logoColor=white)
+
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![Codecov][codecov-src]][codecov-href]
+[![Bundlejs][bundlejs-src]][bundlejs-href]
+[![jsDocs.io][jsDocs-src]][jsDocs-href]
 
 **unplugin-sheet-i18n** enables doing your i18n in a [spread]sheet for a better collaborative experience with non-coders and maintainability.
 
@@ -131,3 +137,16 @@ build({
 ## License
 
 [MIT](./LICENSE) License © 2023 [NamesMT](https://github.com/NamesMT)
+
+[npm-version-src]: https://img.shields.io/npm/v/unplugin-sheet-i18n?labelColor=18181B&color=F0DB4F
+[npm-version-href]: https://npmjs.com/package/unplugin-sheet-i18n
+[npm-downloads-src]: https://img.shields.io/npm/dm/unplugin-sheet-i18n?labelColor=18181B&color=F0DB4F
+[npm-downloads-href]: https://npmjs.com/package/unplugin-sheet-i18n
+[codecov-src]: https://img.shields.io/codecov/c/gh/namesmt/unplugin-sheet-i18n/main?labelColor=18181B&color=F0DB4F
+[codecov-href]: https://codecov.io/gh/namesmt/unplugin-sheet-i18n
+[license-src]: https://img.shields.io/github/license/namesmt/unplugin-sheet-i18n.svg?labelColor=18181B&color=F0DB4F
+[license-href]: https://github.com/namesmt/unplugin-sheet-i18n/blob/main/LICENSE
+[bundlejs-src]: https://img.shields.io/bundlejs/size/unplugin-sheet-i18n?labelColor=18181B&color=F0DB4F
+[bundlejs-href]: https://bundlejs.com/?q=unplugin-sheet-i18n
+[jsDocs-src]: https://img.shields.io/badge/Check_out-jsDocs.io---?labelColor=18181B&color=F0DB4F
+[jsDocs-href]: https://www.jsdocs.io/package/unplugin-sheet-i18n
