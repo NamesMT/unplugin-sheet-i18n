@@ -4,6 +4,8 @@ import type { ResolvedConfig } from 'vite'
 import type { Options } from '../types.js'
 import { createContext } from '../context.js'
 
+export { createContext }
+
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
   let ctx = createContext(options)
 
