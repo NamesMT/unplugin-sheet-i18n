@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.4.7
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.6...v0.4.7)
+
+### 🩹 Fixes
+
+- Actually support DSV file ([8e0fda5](https://github.com/namesmt/unplugin-sheet-i18n/commit/8e0fda5))
+- Actually support TSV file ([d0f5562](https://github.com/namesmt/unplugin-sheet-i18n/commit/d0f5562))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.6
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.5...v0.4.6)
