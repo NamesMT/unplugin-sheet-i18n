@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.4.5
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.4...v0.4.5)
+
+### 📖 Documentation
+
+- **README:** Badges ([6662d52](https://github.com/namesmt/unplugin-sheet-i18n/commit/6662d52))
+
+### 🏡 Chore
+
+- Remove `unocss` from eslint config ([f1c3ab3](https://github.com/namesmt/unplugin-sheet-i18n/commit/f1c3ab3))
+- Update deps ([6eed173](https://github.com/namesmt/unplugin-sheet-i18n/commit/6eed173))
+- Emit CJS, turn off minify ([9c1279d](https://github.com/namesmt/unplugin-sheet-i18n/commit/9c1279d))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.4
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.3...v0.4.4)
