@@ -16,7 +16,7 @@ set_fs(fs)
 
 export const defaultOptions = {
   // eslint-disable-next-line regexp/no-useless-non-capturing-group
-  include: /(?:\/|\\|^)i18n\.(?:csv)$/,
+  include: /(?:\/|\\|^)i18n\.(?:[cd]sv)$/,
   keyStyle: 'flat',
   keyColumn: 'KEY',
   comments: '//',
@@ -32,7 +32,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
 
   const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir!) : null
-  const allowedExtensions = ['.csv']
+  const allowedExtensions = ['.csv', '.dsv']
   const spreadsheetExtensions = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.ods']
   if (resolvedOptions.xlsx)
     allowedExtensions.push(...spreadsheetExtensions)
@@ -90,7 +90,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     // Parse to json and do a simple filter for keyColumn, skipping rows without a defined key.
     let emptyKeySkipped = 0
-    const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true })
+    const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true, delimiter: resolvedOptions.delimiter })
     const locales = parsed.meta.fields!.filter(prop => prop.match(/^\w{2}(?:-\w{2})?$/))
     let parsedData = parsed.data.filter((row) => {
       if (!isEmptyCell(row[resolvedOptions.keyColumn]))

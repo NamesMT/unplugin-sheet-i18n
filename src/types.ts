@@ -1,11 +1,12 @@
+import type { ParseConfig } from 'papaparse'
 import type { FilterPattern } from 'vite'
 
 export interface Options {
   /**
    * Default sheetI18n include i18n.csv file only,
    *
-   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:csv|xls[xmb]?|ods)$/
-   * @default /(?:\/|\\|^)i18n\.(?:csv)$/
+   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cd]sv|xls[xmb]?|ods)$/
+   * @default /(?:\/|\\|^)i18n\.(?:[cd]sv)$/
    */
   include?: FilterPattern
 
@@ -48,6 +49,13 @@ export interface Options {
    * @default undefined
    */
   valueColumn?: string
+
+  /**
+   * Setting a custom delimiter for the dsv file, by default it's auto detected
+   * 
+   * @default undefined // auto-detect
+   */
+  delimiter?: ParseConfig['delimiter']
 
   /**
    * A string that indicates a comment (for example, "#" or "//").
