@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.4.8
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.7...v0.4.8)
+
+### 🚀 Enhancements
+
+- Exports `createContext` for programmatic usage ([b4b9010](https://github.com/namesmt/unplugin-sheet-i18n/commit/b4b9010))
+
+### 📖 Documentation
+
+- **README:** Add setup guide for `unbuild`, `programmatic` ([75cac42](https://github.com/namesmt/unplugin-sheet-i18n/commit/75cac42))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.7
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.6...v0.4.7)
