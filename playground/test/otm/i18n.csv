@@ -1,6 +1,6 @@
 KEY,DESCRIPTION,en,vi
-frenchSpaceStyle,,Bonjour !
+frenchSpaceStyleTest,,Bonjour !,Chào !
 hello2,,Hello There!,Exists
-$JSON;FAQ;sort:overview;data;name,,Halo
-$FILE;files/ok;html,,Halo,Ei
-$FILE;files/df,,Halo
+$JSON;FAQ;sort:overview;data;name,,Halo,
+$FILE;files/ok;html,,English file,Vietnamese file
+$FILE;files/df,,English file,Vietnamese file
