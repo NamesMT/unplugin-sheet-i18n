@@ -5,8 +5,8 @@ export interface Options {
   /**
    * Default sheetI18n include i18n.csv file only,
    *
-   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cd]sv|xls[xmb]?|ods)$/
-   * @default /(?:\/|\\|^)i18n\.(?:[cd]sv)$/
+   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cdt]sv|xls[xmb]?|ods)$/
+   * @default /(?:\/|\\|^)i18n\.(?:[cdt]sv)$/
    */
   include?: FilterPattern
 

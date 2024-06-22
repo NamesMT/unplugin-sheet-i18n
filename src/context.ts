@@ -16,7 +16,7 @@ set_fs(fs)
 
 export const defaultOptions = {
   // eslint-disable-next-line regexp/no-useless-non-capturing-group
-  include: /(?:\/|\\|^)i18n\.(?:[cd]sv)$/,
+  include: /(?:\/|\\|^)i18n\.(?:[cdt]sv)$/,
   keyStyle: 'flat',
   keyColumn: 'KEY',
   comments: '//',
@@ -69,7 +69,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
 
     // Read the file and convert to a csv string
-    let csvString = /^.[cd]sv$/.test(pathParsed.ext)
+    let csvString = /^.[cdt]sv$/.test(pathParsed.ext)
       ? readCsvFile(file)
       : readXlsxFile(file)
 
