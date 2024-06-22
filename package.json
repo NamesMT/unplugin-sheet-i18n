@@ -128,7 +128,6 @@
     "@nuxt/schema": "^3.11.2",
     "@types/node": "^20.10.2",
     "@types/papaparse": "^5.3.14",
-    "@unocss/eslint-config": "^0.60.4",
     "@vitest/coverage-v8": "^1.6.0",
     "eslint": "^9.4.0",
     "lint-staged": "^15.2.5",
