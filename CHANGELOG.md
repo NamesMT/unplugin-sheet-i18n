@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.4.6
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.5...v0.4.6)
+
+### 🩹 Fixes
+
+- Bad checking of csv extension ([a75cd12](https://github.com/namesmt/unplugin-sheet-i18n/commit/a75cd12))
+
+### 💅 Refactors
+
+- Make sure all rows have same number of columns for Github format ([8e5a99a](https://github.com/namesmt/unplugin-sheet-i18n/commit/8e5a99a))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.5
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.4...v0.4.5)
