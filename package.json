@@ -31,38 +31,45 @@
   "exports": {
     ".": {
       "types": "./dist/unplugin/index.d.mts",
-      "import": "./dist/unplugin/index.mjs"
+      "import": "./dist/unplugin/index.mjs",
+      "require": "./dist/unplugin/index.cjs"
     },
     "./vite": {
       "types": "./dist/unplugin/vite.d.mts",
-      "import": "./dist/unplugin/vite.mjs"
+      "import": "./dist/unplugin/vite.mjs",
+      "require": "./dist/unplugin/vite.cjs"
     },
     "./webpack": {
       "types": "./dist/unplugin/webpack.d.mts",
-      "import": "./dist/unplugin/webpack.mjs"
+      "import": "./dist/unplugin/webpack.mjs",
+      "require": "./dist/unplugin/webpack.cjs"
     },
     "./rollup": {
       "types": "./dist/unplugin/rollup.d.mts",
-      "import": "./dist/unplugin/rollup.mjs"
+      "import": "./dist/unplugin/rollup.mjs",
+      "require": "./dist/unplugin/rollup.cjs"
     },
     "./esbuild": {
       "types": "./dist/unplugin/esbuild.d.mts",
-      "import": "./dist/unplugin/esbuild.mjs"
+      "import": "./dist/unplugin/esbuild.mjs",
+      "require": "./dist/unplugin/esbuild.cjs"
     },
     "./nuxt": {
       "types": "./dist/unplugin/nuxt.d.mts",
-      "import": "./dist/unplugin/nuxt.mjs"
+      "import": "./dist/unplugin/nuxt.mjs",
+      "require": "./dist/unplugin/nuxt.cjs"
     },
     "./types": {
       "types": "./dist/types.d.mts",
-      "import": "./dist/types.mjs"
+      "import": "./dist/types.mjs",
+      "require": "./dist/types.cjs"
     },
     "./*": "./*"
   },
-  "source": "./src/unplugin/index.mts",
-  "main": "./dist/unplugin/index.mjs",
+  "source": "./src/unplugin/index.ts",
+  "main": "./dist/unplugin/index.cjs",
   "module": "./dist/unplugin/index.mjs",
-  "types": "./dist/unplugin/index.d.mts",
+  "types": "./dist/unplugin/index.d.cts",
   "files": [
     "dist"
   ],

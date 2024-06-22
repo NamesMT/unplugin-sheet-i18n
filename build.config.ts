@@ -23,9 +23,11 @@ export default defineBuildConfig({
   declaration: 'node16',
   clean: true,
   rollup: {
+    emitCJS: true,
     inlineDependencies: true,
     esbuild: {
-      minify: true,
+      target: 'esnext',
+      // minify: true,
     },
   },
   ...sharedConfig,
