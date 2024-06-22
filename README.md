@@ -126,6 +126,42 @@ build({
 
 <br></details>
 
+<details>
+<summary>unbuild</summary><br>
+
+```ts
+// build.config.ts
+import { defineBuildConfig } from 'unbuild'
+import SheetI18n from 'unplugin-sheet-i18n/rollup'
+
+export default defineBuildConfig({
+  hooks: {
+    'rollup:options': function (ctx, options) {
+      options.plugins = [options.plugins, SheetI18n({
+      })]
+    },
+  },
+})
+```
+
+<br></details>
+
+<details>
+<summary>programmatic</summary><br>
+
+See it in action [at `starter-fullstack`](https://github.com/NamesMT/starter-fullstack/blob/main/packages/locales/index.ts)
+
+```ts
+// index.ts
+import { createContext } from 'unplugin-sheet-i18n'
+
+createContext({
+  outDir: 'dist',
+}).scanConvert()
+```
+
+<br></details>
+
 ### Options:
 [See Options](./src/types.ts)
 
