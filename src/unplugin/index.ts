@@ -16,8 +16,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
       async configResolved(config: ResolvedConfig) {
         if (ctx.root !== config.root) {
           ctx = createContext(options, config.root)
-          await ctx.init()
-          await ctx.scanConvert()
         }
       },
       async handleHotUpdate({ file }) {
