@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.4.9
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.8...v0.4.9)
+
+### 🩹 Fixes
+
+- Potential duplicated run ([8b42da3](https://github.com/namesmt/unplugin-sheet-i18n/commit/8b42da3))
+
+### 🏡 Chore
+
+- Update deps ([e5c3c82](https://github.com/namesmt/unplugin-sheet-i18n/commit/e5c3c82))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.8
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.7...v0.4.8)
