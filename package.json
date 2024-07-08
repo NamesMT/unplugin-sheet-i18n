@@ -2,7 +2,7 @@
   "name": "unplugin-sheet-i18n",
   "type": "module",
   "version": "0.4.8",
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.5.0",
   "description": "internalization with csv, tsv, dsv, excel sheets, convert sheet to i18n-compatible json",
   "author": "NamesMT <dangquoctrung123@gmail.com>",
   "license": "MIT",
@@ -126,30 +126,31 @@
     "papaparse": "^5.4.1",
     "pathe": "^1.1.2",
     "std-env": "^3.7.0",
-    "unplugin": "^1.10.1"
+    "unplugin": "^1.11.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.1",
-    "@namesmt/utils": "^0.3.0",
-    "@nuxt/kit": "^3.12.2",
-    "@nuxt/schema": "^3.12.2",
-    "@types/node": "^20.14.8",
+    "@antfu/eslint-config": "^2.21.3",
+    "@namesmt/utils": "^0.3.1",
+    "@nuxt/kit": "^3.12.3",
+    "@nuxt/schema": "^3.12.3",
+    "@types/node": "^20.14.10",
     "@types/papaparse": "^5.3.14",
     "@vitest/coverage-v8": "^1.6.0",
-    "eslint": "^9.5.0",
+    "eslint": "^9.6.0",
     "lint-staged": "^15.2.7",
     "rollup": "^4.18.0",
     "simple-git-hooks": "^2.11.1",
-    "tsx": "^4.15.7",
-    "typescript": "^5.5.2",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
-    "vite": "^5.3.1",
+    "vite": "^5.3.3",
     "vitest": "^1.6.0",
     "webpack": "^5.92.1"
   },
   "pnpm": {
     "overrides": {
-      "hasown": "npm:@nolyfill/hasown@latest"
+      "hasown": "npm:@nolyfill/hasown@^1",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1"
     }
   },
   "simple-git-hooks": {
