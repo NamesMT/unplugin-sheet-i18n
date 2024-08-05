@@ -51,6 +51,13 @@ export interface Options {
   valueColumn?: string
 
   /**
+   * The regular expression to match/detect locales columns
+   * 
+   * @default /^\w{2}(?:-\w{2,4})?$/
+   */
+  localesMatcher?: RegExp
+
+  /**
    * Setting a custom delimiter for the dsv file, by default it's auto detected
    * 
    * @default undefined // auto-detect

@@ -19,6 +19,7 @@ export const defaultOptions = {
   include: /(?:\/|\\|^)i18n\.(?:[cdt]sv)$/,
   keyStyle: 'flat',
   keyColumn: 'KEY',
+  localesMatcher: /^\w{2}(?:-\w{2,4})?$/,
   comments: '//',
   mergeOutput: true,
   replacePunctuationSpace: true,
@@ -91,7 +92,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     // Parse to json and do a simple filter for keyColumn, skipping rows without a defined key.
     let emptyKeySkipped = 0
     const parsed = Papa.parse<any>(csvString, { skipEmptyLines: true, header: true, delimiter: resolvedOptions.delimiter })
-    const locales = parsed.meta.fields!.filter(prop => prop.match(/^\w{2}(?:-\w{2,4})?$/))
+    const locales = parsed.meta.fields!.filter(prop => prop.match(resolvedOptions.localesMatcher))
     let parsedData = parsed.data.filter((row) => {
       if (!isEmptyCell(row[resolvedOptions.keyColumn]))
         return true
