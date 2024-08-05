@@ -74,7 +74,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.16.0"
   },
   "scripts": {
     "start": "NODE_ENV=dev tsx src/unplugin/index.ts",
