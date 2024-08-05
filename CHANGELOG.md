@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.4.10
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.9...v0.4.10)
+
+### 🚀 Enhancements
+
+- Configurable `localesMatcher` regex ([#6](https://github.com/namesmt/unplugin-sheet-i18n/pull/6))
+
+### 🏡 Chore
+
+- Align base with `starter-ts`, update deps ([e3343d7](https://github.com/namesmt/unplugin-sheet-i18n/commit/e3343d7))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+- Sunmin Koak ([@smkoak](http://github.com/smkoak))
+
 ## v0.4.9
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.8...v0.4.9)
