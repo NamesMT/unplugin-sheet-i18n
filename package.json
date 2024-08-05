@@ -2,7 +2,7 @@
   "name": "unplugin-sheet-i18n",
   "type": "module",
   "version": "0.4.9",
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.6.0",
   "description": "internalization with csv, tsv, dsv, excel sheets, convert sheet to i18n-compatible json",
   "author": "NamesMT <dangquoctrung123@gmail.com>",
   "license": "MIT",
@@ -120,32 +120,32 @@
     }
   },
   "dependencies": {
-    "@e965/xlsx": "^0.20.2",
+    "@e965/xlsx": "^0.20.3",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
     "papaparse": "^5.4.1",
     "pathe": "^1.1.2",
     "std-env": "^3.7.0",
-    "unplugin": "^1.11.0"
+    "unplugin": "^1.12.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.21.3",
-    "@namesmt/utils": "^0.3.1",
-    "@nuxt/kit": "^3.12.3",
-    "@nuxt/schema": "^3.12.3",
-    "@types/node": "^20.14.10",
+    "@antfu/eslint-config": "^2.24.1",
+    "@namesmt/utils": "^0.5.2",
+    "@nuxt/kit": "^3.12.4",
+    "@nuxt/schema": "^3.12.4",
+    "@types/node": "^20.14.14",
     "@types/papaparse": "^5.3.14",
-    "@vitest/coverage-v8": "^1.6.0",
-    "eslint": "^9.6.0",
-    "lint-staged": "^15.2.7",
-    "rollup": "^4.18.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint": "^9.8.0",
+    "lint-staged": "^15.2.8",
+    "rollup": "^4.20.0",
     "simple-git-hooks": "^2.11.1",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3",
+    "tsx": "^4.16.5",
+    "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
-    "vite": "^5.3.3",
-    "vitest": "^1.6.0",
-    "webpack": "^5.92.1"
+    "vite": "^5.3.5",
+    "vitest": "^2.0.5",
+    "webpack": "^5.93.0"
   },
   "pnpm": {
     "overrides": {

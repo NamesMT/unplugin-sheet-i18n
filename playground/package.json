@@ -8,7 +8,7 @@
   "devDependencies": {
     "nodemon": "^3.1.4",
     "unplugin-sheet-i18n": "workspace:^",
-    "vite": "^5.3.3",
-    "vite-plugin-inspect": "^0.8.4"
+    "vite": "^5.3.5",
+    "vite-plugin-inspect": "^0.8.5"
   }
 }

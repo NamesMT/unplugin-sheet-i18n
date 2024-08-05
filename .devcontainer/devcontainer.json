@@ -1,3 +1,4 @@
+/* eslint-disable jsonc/comma-dangle */
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/alpine
 {
@@ -20,62 +21,24 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "AMiner.codegeex",
-        "antfu.goto-alias",
-        "antfu.iconify",
-        "antfu.open-in-github-button",
-        "antfu.unocss",
-        "antfu.vite",
-        "antfu.where-am-i",
-        "Bito.Bito",
-        "ChakrounAnas.turbo-console-log",
-        "cweijan.vscode-mysql-client2",
         "dbaeumer.vscode-eslint",
-        "eamodio.gitlens",
-        "funkyremi.vscode-google-translate",
-        "george-alisson.html-preview-vscode",
-        "GitHub.vscode-pull-request-github",
-        "Gruntfuggly.todo-tree",
-        "jock.svg",
-        "lokalise.i18n-ally",
-        "ms-vscode.live-server",
-        "naumovs.color-highlight",
-        "oderwat.indent-rainbow",
-        "rangav.vscode-thunder-client",
-        "richie5um2.vscode-sort-json",
-        "RobertOstermann.inline-parameters-extended",
         "streetsidesoftware.code-spell-checker",
-        "svsool.markdown-memo",
-        "unional.vscode-sort-package-json",
         "usernamehw.errorlens",
-        "Vue.volar",
-        "Vue.vscode-typescript-vue-plugin",
-        "yzhang.markdown-all-in-one"
+        "yoavbls.pretty-ts-errors",
       ]
     }
   },
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
-  "workspaceMount": "",
-  "workspaceFolder": "${localWorkspaceFolder}",
+  // "remoteUser": "root",
   "runArgs": [
-    // run container as current user
-    "--userns=keep-id",
-    // disable selinux isolation that breaks bind mounts
-    "--security-opt=label=disable",
-    // ensure project directory is mounted incase it exists outside the home directory
-    "--volume=${localWorkspaceFolder}:${localWorkspaceFolder}",
     // mount pnpm store for shared caching/linking
-    "--volume=${env:PNPM_HOME}/store:${env:PNPM_HOME}/store"
+    // "--volume=${env:PNPM_HOME}/store:${env:PNPM_HOME}/store",
+
     // // Enable both in this block if you want to mount home dir
     // mount user home directory for things like git, ssh, and other configs
     // "--volume=${env:HOME}:${env:HOME}",
     // isolate the .vscode-server folder so you don't overwrite settings from remote ssh vscode
-    // "--volume=${localWorkspaceFolder}/.cache/vscode-server:${env:HOME}/.vscode-server"
+    // "--volume=${localWorkspaceFolder}/.cache/vscode-server:${env:HOME}/.vscode-server",
     // //
   ],
-  "containerEnv": {
-    // ensure users home directory is the same inside the container as it is outside
-    "HOME": "${env:HOME}"
-  }
 }
