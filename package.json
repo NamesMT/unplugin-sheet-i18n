@@ -2,7 +2,7 @@
   "name": "unplugin-sheet-i18n",
   "type": "module",
   "version": "0.4.10",
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.7.0",
   "description": "internalization with csv, tsv, dsv, excel sheets, convert sheet to i18n-compatible json",
   "author": "NamesMT <dangquoctrung123@gmail.com>",
   "license": "MIT",
@@ -74,7 +74,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.20.4"
   },
   "scripts": {
     "start": "NODE_ENV=dev tsx src/unplugin/index.ts",
@@ -92,8 +92,8 @@
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
-    "@nuxt/kit": "^3",
-    "@nuxt/schema": "^3"
+    "@nuxt/kit": "^3.12.4",
+    "@nuxt/schema": "^3.12.4"
   },
   "peerDependenciesMeta": {
     "@nuxt/kit": {
@@ -105,17 +105,17 @@
   },
   "dependencies": {
     "@e965/xlsx": "^0.20.3",
-    "@namesmt/utils": "^0.5.2",
+    "@namesmt/utils": "^0.5.3",
     "consola": "^3.2.3",
     "defu": "^6.1.4",
     "papaparse": "^5.4.1",
     "pathe": "^1.1.2",
     "std-env": "^3.7.0",
-    "unplugin": "^1.12.0",
-    "vite": "^5.3.5"
+    "unplugin": "^1.12.1",
+    "vite": "^5.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.24.1",
+    "@antfu/eslint-config": "^2.25.0",
     "@nuxt/kit": "^3.12.4",
     "@nuxt/schema": "^3.12.4",
     "@types/node": "^20.14.14",
@@ -124,15 +124,15 @@
     "eslint": "^9.8.0",
     "lint-staged": "^15.2.8",
     "simple-git-hooks": "^2.11.1",
-    "tsx": "^4.16.5",
+    "tsx": "^4.17.0",
     "typescript": "^5.5.4",
     "unbuild": "^2.0.0",
     "vitest": "^2.0.5"
   },
   "pnpm": {
     "overrides": {
-      "hasown": "npm:@nolyfill/hasown@^1",
-      "is-core-module": "npm:@nolyfill/is-core-module@^1"
+      "hasown": "npm:@nolyfill/hasown@^1.0.29",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1.0.39"
     }
   },
   "simple-git-hooks": {
