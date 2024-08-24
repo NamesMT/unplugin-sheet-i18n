@@ -172,7 +172,7 @@ createContext({
 
 ## License
 
-[MIT](./LICENSE) License © 2023 [NamesMT](https://github.com/NamesMT)
+[MIT](./LICENSE) License © 2024 [NamesMT](https://github.com/NamesMT)
 
 [npm-version-src]: https://img.shields.io/npm/v/unplugin-sheet-i18n?labelColor=18181B&color=F0DB4F
 [npm-version-href]: https://npmjs.com/package/unplugin-sheet-i18n
