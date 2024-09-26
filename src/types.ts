@@ -80,6 +80,13 @@ export interface Options {
   mergeOutput?: boolean
 
   /**
+   * Merge files inputs or keep input path splitted if outDir specified
+   *
+   * @default true
+   */
+  mergeInput?: boolean
+
+  /**
    * Replaces all spaces followed by a "high" punctuation with a non-breaking space, this is useful to fix ugly UI wrapping for cases like French that requires a space before the punctuations.
    *
    * Punctuations currently scan for is: !$%:;?+-

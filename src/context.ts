@@ -22,6 +22,7 @@ export const defaultOptions = {
   localesMatcher: /^\w{2}(?:-\w{2,4})?$/,
   comments: '//',
   mergeOutput: true,
+  mergeInput: true,
   replacePunctuationSpace: true,
   jsonProcessorClean: true,
   fileProcessorClean: true,
@@ -65,6 +66,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     logger.info(`[sheetI18n] Processing: ${relativePath}`)
 
     const pathParsed = path.parse(file)
+    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
 
     if (!allowedExtensions.includes(pathParsed.ext))
       return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
@@ -123,14 +125,14 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueColumn) {
-      outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle, resolvedOptions)
+      outputs[`${path.resolve(resolvedOutDirFinal || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle, resolvedOptions)
     }
     else {
       if (!locales?.length)
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueColumn?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDir || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle, resolvedOptions)
+        outputs[`${path.resolve(resolvedOutDirFinal || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle, resolvedOptions)
       })
     }
 
@@ -199,9 +201,10 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       })
     })
 
+    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
     if (Object.keys(jsons).length) {
       Object.keys(jsons).forEach((k) => {
-        outputFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
+        outputFileSync(`${path.resolve(resolvedOutDirFinal || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $JSON keys processed`)
     }
@@ -243,9 +246,10 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       })
     })
 
+    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
     if (Object.keys(files).length) {
       Object.keys(files).forEach((k) => {
-        outputFileSync(`${path.resolve(resolvedOutDir || pathParsed.dir, k)}`, files[k])
+        outputFileSync(`${path.resolve(resolvedOutDirFinal || pathParsed.dir, k)}`, files[k])
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $FILE keys processed`)
     }

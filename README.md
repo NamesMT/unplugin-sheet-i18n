@@ -13,6 +13,7 @@
 - File-to-file convert: `en.csv -> en.json`
 - File-to-multiple convert: `i18n.csv -> en.json, vi.json, fr.json,...`
 - Output merging: `i18n_a.csv + i18n_b.csv -> en.json`
+- Input merging: `src1/i18n.csv + src2/i18n.csv -> outDir/src1/en.json, outDir/src2/en.json`
 - File generation: `i18n_files.csv -> cloud_en.json, cloud_fr.json, template_en.html, template_fr.html`
 - And more!
 
