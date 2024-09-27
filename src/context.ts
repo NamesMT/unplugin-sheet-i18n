@@ -288,16 +288,18 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     structureMode: Options['preserveStructure']
   }
   function _resolveOutputPath({ outName, relativePath, parsedPath, structureMode }: _resolveOutputPathParams) {
-    const outDir = resolvedOutDir || parsedPath.dir
+    if (!resolvedOutDir)
+      return path.resolve(parsedPath.dir, outName)
+
     switch (structureMode) {
       case 'parent':
-        return `${path.resolve(outDir, path.parse(relativePath).dir, outName)}`
+        return `${path.resolve(resolvedOutDir, path.parse(relativePath).dir, outName)}`
       case 'nested':
-        return `${path.resolve(outDir, path.parse(relativePath).dir, parsedPath.name, outName)}`
+        return `${path.resolve(resolvedOutDir, path.parse(relativePath).dir, parsedPath.name, outName)}`
       case 'prefixed':
-        return `${path.resolve(outDir, path.parse(relativePath).dir, `${parsedPath.name}_${outName}`)}`
+        return `${path.resolve(resolvedOutDir, path.parse(relativePath).dir, `${parsedPath.name}_${outName}`)}`
       default:
-        return `${path.resolve(outDir, outName)}`
+        return `${path.resolve(resolvedOutDir, outName)}`
     }
   }
 

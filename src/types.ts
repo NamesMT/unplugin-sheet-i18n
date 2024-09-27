@@ -88,6 +88,8 @@ export interface Options {
   /**
    * Specify the output structure
    * 
+   * Requires `outDir` to be configured
+   * 
    * `'parent'`: `/a/i18n.csv` => `/a/en.json`
    * 
    * `'nested'`: `/a/i18n.csv` => `/a/i18n/en.json`
