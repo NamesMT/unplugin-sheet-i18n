@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v0.4.12
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.11...v0.4.12)
+
+### 🚀 Enhancements
+
+- ⚠️  `mergeInput` becomes `preserveStructure`, add more "modes" ([396797e](https://github.com/namesmt/unplugin-sheet-i18n/commit/396797e))
+
+### 🩹 Fixes
+
+- `preserveStructure` requires a configured `outDir` ([e56395b](https://github.com/namesmt/unplugin-sheet-i18n/commit/e56395b))
+
+### 💅 Refactors
+
+- Move functions into `utils` folder ([b4d8e36](https://github.com/namesmt/unplugin-sheet-i18n/commit/b4d8e36))
+- Minor linebreaks ([9e92519](https://github.com/namesmt/unplugin-sheet-i18n/commit/9e92519))
+
+### 🏡 Chore
+
+- Update deps, apply lint fixes ([b9ae394](https://github.com/namesmt/unplugin-sheet-i18n/commit/b9ae394))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  `mergeInput` becomes `preserveStructure`, add more "modes" ([396797e](https://github.com/namesmt/unplugin-sheet-i18n/commit/396797e))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.11
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.10...v0.4.11)
