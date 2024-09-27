@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.13
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.12...v0.4.13)
+
+### 📖 Documentation
+
+- **README:** Correct feature describe ([6b3b51c](https://github.com/namesmt/unplugin-sheet-i18n/commit/6b3b51c))
+
+### ❤️ Contributors
+
+- Trung Dang ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.12
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.11...v0.4.12)
