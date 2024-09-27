@@ -22,7 +22,6 @@ export const defaultOptions = {
   localesMatcher: /^\w{2}(?:-\w{2,4})?$/,
   comments: '//',
   mergeOutput: true,
-  mergeInput: true,
   replacePunctuationSpace: true,
   jsonProcessorClean: true,
   fileProcessorClean: true,
@@ -33,7 +32,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
 
-  const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir!) : null
+  const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir) : null
   const allowedExtensions = ['.csv', '.dsv']
   const spreadsheetExtensions = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.ods']
   if (resolvedOptions.xlsx)
@@ -65,14 +64,13 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     logger.info(`[sheetI18n] Processing: ${relativePath}`)
 
-    const pathParsed = path.parse(file)
-    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
+    const parsedPath = path.parse(file)
 
-    if (!allowedExtensions.includes(pathParsed.ext))
-      return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(pathParsed.ext) ? `, xlsx is not enabled.` : ''}`)
+    if (!allowedExtensions.includes(parsedPath.ext))
+      return logger.error(`[sheetI18n] unexpected extension: ${file}${spreadsheetExtensions.includes(parsedPath.ext) ? `, xlsx is not enabled.` : ''}`)
 
     // Read the file and convert to a csv string
-    let csvString = /^.[cdt]sv$/.test(pathParsed.ext)
+    let csvString = /^.[cdt]sv$/.test(parsedPath.ext)
       ? readCsvFile(file)
       : readXlsxFile(file)
 
@@ -109,7 +107,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     // TODO: minor: optimize special processors to use a same filter pass
     // jsonProcessor
     if (resolvedOptions.jsonProcessor) {
-      const filtered = _jsonProcessor({ data: parsedData, relativePath, pathParsed, locales })
+      const filtered = _jsonProcessor({ data: parsedData, relativePath, parsedPath, locales })
 
       if (resolvedOptions.jsonProcessorClean)
         parsedData = filtered
@@ -117,7 +115,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     // fileProcessor
     if (resolvedOptions.fileProcessor) {
-      const filtered = _fileProcessor({ data: parsedData, relativePath, pathParsed, locales })
+      const filtered = _fileProcessor({ data: parsedData, relativePath, parsedPath, locales })
 
       if (resolvedOptions.fileProcessorClean)
         parsedData = filtered
@@ -125,14 +123,26 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
 
     const outputs: Record<string, ReturnType<typeof transformToI18n>> = {}
     if (resolvedOptions.valueColumn) {
-      outputs[`${path.resolve(resolvedOutDirFinal || pathParsed.dir, pathParsed.name)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle, resolvedOptions)
+      const outputPath = _resolveOutputPath({
+        outName: `${parsedPath.name}.json`,
+        relativePath,
+        parsedPath,
+        structureMode: resolvedOptions.preserveStructure,
+      })
+      outputs[outputPath] = transformToI18n(parsedData, resolvedOptions.keyColumn, resolvedOptions.valueColumn, resolvedOptions.keyStyle, resolvedOptions)
     }
     else {
       if (!locales?.length)
         return logger.error('[sheetI18n] cannot detect any locales column, maybe you need to use valueColumn?')
 
       locales.forEach((locale) => {
-        outputs[`${path.resolve(resolvedOutDirFinal || pathParsed.dir, locale)}.json`] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle, resolvedOptions)
+        const outputPath = _resolveOutputPath({
+          outName: `${locale}.json`,
+          relativePath,
+          parsedPath,
+          structureMode: resolvedOptions.preserveStructure,
+        })
+        outputs[outputPath] = transformToI18n(parsedData, resolvedOptions.keyColumn, locale, resolvedOptions.keyStyle, resolvedOptions)
       })
     }
 
@@ -140,7 +150,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       if (!content)
         logger.warn(`[sheetI18n] empty content for ${path}`)
 
-      ;(resolvedOptions.mergeOutput ? outputWriteMerge : outputFileSync)(path, content ? JSON.stringify(content, undefined, 2) : '')
+      ; (resolvedOptions.mergeOutput ? outputWriteMerge : outputFileSync)(path, content ? JSON.stringify(content, undefined, 2) : '')
     })
   }
 
@@ -150,13 +160,13 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       await convert(file)
   }
 
-  interface _JsonProcessorProps {
+  interface _jsonProcessorParams {
     data: Record<any, any>[]
-    pathParsed: ParsedPath
+    parsedPath: ParsedPath
     relativePath: string
     locales: string[]
   }
-  function _jsonProcessor({ data, relativePath, pathParsed, locales }: _JsonProcessorProps) {
+  function _jsonProcessor({ data, relativePath, parsedPath, locales }: _jsonProcessorParams) {
     const jsons: any = {}
     // eslint-disable-next-line array-callback-return
     const filtered = data.filter((row) => {
@@ -201,10 +211,17 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       })
     })
 
-    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
     if (Object.keys(jsons).length) {
       Object.keys(jsons).forEach((k) => {
-        outputFileSync(`${path.resolve(resolvedOutDirFinal || pathParsed.dir, k)}.json`, JSON.stringify(Object.values(jsons[k]), undefined, 2))
+        outputFileSync(
+          _resolveOutputPath({
+            outName: `${k}.json`,
+            relativePath,
+            parsedPath,
+            structureMode: resolvedOptions.preserveStructure,
+          }),
+          JSON.stringify(Object.values(jsons[k]), undefined, 2),
+        )
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $JSON keys processed`)
     }
@@ -212,13 +229,13 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
     return filtered
   }
 
-  interface _FileProcessorProps {
+  interface _fileProcessorParams {
     data: Record<any, any>[]
-    pathParsed: ParsedPath
+    parsedPath: ParsedPath
     relativePath: string
     locales: string[]
   }
-  function _fileProcessor({ data, relativePath, pathParsed, locales }: _FileProcessorProps) {
+  function _fileProcessor({ data, relativePath, parsedPath, locales }: _fileProcessorParams) {
     const files: any = {}
     // eslint-disable-next-line array-callback-return
     const filtered = data.filter((row) => {
@@ -246,15 +263,42 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       })
     })
 
-    const resolvedOutDirFinal = resolvedOutDir && !resolvedOptions.mergeInput ? path.join(resolvedOutDir, path.basename(pathParsed.dir)) : resolvedOutDir
     if (Object.keys(files).length) {
       Object.keys(files).forEach((k) => {
-        outputFileSync(`${path.resolve(resolvedOutDirFinal || pathParsed.dir, k)}`, files[k])
+        outputFileSync(
+          _resolveOutputPath({
+            outName: k,
+            relativePath,
+            parsedPath,
+            structureMode: resolvedOptions.preserveStructure,
+          }),
+          files[k],
+        )
       })
       logger.info(`[sheetI18n] ${relativePath}: Special $FILE keys processed`)
     }
 
     return filtered
+  }
+
+  interface _resolveOutputPathParams {
+    outName: string
+    relativePath: string
+    parsedPath: ParsedPath
+    structureMode: Options['preserveStructure']
+  }
+  function _resolveOutputPath({ outName, relativePath, parsedPath, structureMode }: _resolveOutputPathParams) {
+    const outDir = resolvedOutDir || parsedPath.dir
+    switch (structureMode) {
+      case 'parent':
+        return `${path.resolve(outDir, path.parse(relativePath).dir, outName)}`
+      case 'nested':
+        return `${path.resolve(outDir, path.parse(relativePath).dir, parsedPath.name, outName)}`
+      case 'prefixed':
+        return `${path.resolve(outDir, path.parse(relativePath).dir, `${parsedPath.name}_${outName}`)}`
+      default:
+        return `${path.resolve(outDir, outName)}`
+    }
   }
 
   return {

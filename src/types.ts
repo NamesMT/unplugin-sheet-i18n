@@ -80,11 +80,19 @@ export interface Options {
   mergeOutput?: boolean
 
   /**
-   * Merge files inputs or keep input path splitted if outDir specified
+   * Specify the output structure
+   * 
+   * `'parent'`: `src/a/i18n.csv` => `src/a/en.json`
+   * 
+   * `'nested'`: `src/a/i18n.csv` => `src/a/i18n/en.json`
+   * 
+   * `'prefixed'`: `src/a/i18n.csv` => `src/a/i18n_en.json`
+   * 
+   * `true` is same as `'parent'`
    *
-   * @default true
+   * @default false
    */
-  mergeInput?: boolean
+  preserveStructure?: boolean | 'parent' | 'nested' | 'prefixed'
 
   /**
    * Replaces all spaces followed by a "high" punctuation with a non-breaking space, this is useful to fix ugly UI wrapping for cases like French that requires a space before the punctuations.
