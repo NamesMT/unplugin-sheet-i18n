@@ -1,7 +1,7 @@
 import type { UnpluginFactory } from 'unplugin'
-import { createUnplugin } from 'unplugin'
 import type { ResolvedConfig } from 'vite'
 import type { Options } from '../types.js'
+import { createUnplugin } from 'unplugin'
 import { createContext } from '../context.js'
 
 export { createContext }
