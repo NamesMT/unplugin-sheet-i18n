@@ -6,6 +6,7 @@ export interface Options {
    * Default sheetI18n include i18n.csv file only,
    *
    * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cdt]sv|xls[xmb]?|ods)$/
+   * 
    * @default /(?:\/|\\|^)i18n\.(?:[cdt]sv)$/
    */
   include?: FilterPattern
@@ -17,12 +18,14 @@ export interface Options {
 
   /**
    * Output directory, same directory as source file if undefined
+   * 
    * @default undefined
    */
   outDir?: string
 
   /**
    * Output file key style format
+   * 
    * @default 'flat'
    */
   keyStyle?: 'flat' | 'nested'
@@ -31,12 +34,14 @@ export interface Options {
    * Enable .xls[xmb]? and .ods support, multi-sheets is also supported,
    *
    * ie: sheetI18n will merge all sheets into one
+   * 
    * @default false
    */
   xlsx?: boolean
 
   /**
    * Column name to use as key/id
+   * 
    * @default 'KEY'
    */
   keyColumn?: string
@@ -68,6 +73,7 @@ export interface Options {
    * A string that indicates a comment (for example, "#" or "//").
    *
    * When the parser encounters a line starting with this string, it will skip the line.
+   * 
    * @default '//'
    */
   comments?: false | string | string[]
@@ -82,11 +88,11 @@ export interface Options {
   /**
    * Specify the output structure
    * 
-   * `'parent'`: `src/a/i18n.csv` => `src/a/en.json`
+   * `'parent'`: `/a/i18n.csv` => `/a/en.json`
    * 
-   * `'nested'`: `src/a/i18n.csv` => `src/a/i18n/en.json`
+   * `'nested'`: `/a/i18n.csv` => `/a/i18n/en.json`
    * 
-   * `'prefixed'`: `src/a/i18n.csv` => `src/a/i18n_en.json`
+   * `'prefixed'`: `/a/i18n.csv` => `/a/i18n_en.json`
    * 
    * `true` is same as `'parent'`
    *
