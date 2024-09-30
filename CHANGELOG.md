@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.14
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.13...v0.4.14)
+
+### 🩹 Fixes
+
+- Add `case true` for `preserveStructure` mode ([b4edb51](https://github.com/namesmt/unplugin-sheet-i18n/commit/b4edb51))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](http://github.com/NamesMT))
+
 ## v0.4.13
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.12...v0.4.13)
