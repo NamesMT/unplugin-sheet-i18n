@@ -292,6 +292,7 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
       return path.resolve(parsedPath.dir, outName)
 
     switch (structureMode) {
+      case true:
       case 'parent':
         return `${path.resolve(resolvedOutDir, path.parse(relativePath).dir, outName)}`
       case 'nested':
