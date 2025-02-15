@@ -34,8 +34,8 @@ importers:
         specifier: ^3.7.0
         version: 3.7.0
       unplugin:
-        specifier: ^1.14.1
-        version: 1.14.1(webpack-sources@3.2.3)
+        specifier: ^2.2.0
+        version: 2.2.0
       vite:
         specifier: ^5.4.8
         version: 5.4.8(@types/node@22.7.3)(terser@5.31.3)
@@ -1144,6 +1144,11 @@ packages:
 
   acorn@8.12.1:
     resolution: {integrity: sha512-tcpGyI9zbizT9JbV6oYE477V6mTlXvvi0T0G3SNIYE2apm/G5huBa1+K89VGeovbg+jycCrfhl3ADxErOuO6Jg==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.14.0:
+    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -2756,10 +2761,6 @@ packages:
     resolution: {integrity: sha512-YF2kKIUzAofPMpfH6hOi2cGnv/HrUlfucspc7pDyvv7kGdqXrfj8SCl/t8owkEgKEuu8ZcRjSOxFxVLqwChZ2Q==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.4.47:
     resolution: {integrity: sha512-56rxCq7G/XfB4EkXq9Egn5GCqugWvDFjafDOThIdMBsI15iqPqR5r15TfSr1YPYeEI19YeaXMCbY6u88Y76GLQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -3193,6 +3194,10 @@ packages:
     peerDependenciesMeta:
       webpack-sources:
         optional: true
+
+  unplugin@2.2.0:
+    resolution: {integrity: sha512-m1ekpSwuOT5hxkJeZGRxO7gXbXT3gF26NjQ7GdVHoLoF8/nopLcd/QfPigpCy7i51oFHiRJg/CyHhj4vs2+KGw==}
+    engines: {node: '>=18.12.0'}
 
   untyped@1.4.2:
     resolution: {integrity: sha512-nC5q0DnPEPVURPhfPQLahhSTnemVtPzdx7ofiRxXpOB2SYnb3MfdU3DVGyJdS8Lx+tBWeAePO8BfU/3EgksM7Q==}
@@ -4286,7 +4291,7 @@ snapshots:
       '@vue/shared': 3.4.35
       entities: 4.5.0
       estree-walker: 2.0.2
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   '@vue/compiler-dom@3.4.35':
     dependencies:
@@ -4302,8 +4307,8 @@ snapshots:
       '@vue/shared': 3.4.35
       estree-walker: 2.0.2
       magic-string: 0.30.11
-      postcss: 8.4.41
-      source-map-js: 1.2.0
+      postcss: 8.4.47
+      source-map-js: 1.2.1
 
   '@vue/compiler-ssr@3.4.35':
     dependencies:
@@ -4317,6 +4322,8 @@ snapshots:
       acorn: 8.12.1
 
   acorn@8.12.1: {}
+
+  acorn@8.14.0: {}
 
   ajv@6.12.6:
     dependencies:
@@ -6214,12 +6221,6 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
-  postcss@8.4.41:
-    dependencies:
-      nanoid: 3.3.7
-      picocolors: 1.0.1
-      source-map-js: 1.2.0
-
   postcss@8.4.47:
     dependencies:
       nanoid: 3.3.7
@@ -6677,6 +6678,11 @@ snapshots:
       webpack-virtual-modules: 0.6.2
     optionalDependencies:
       webpack-sources: 3.2.3
+
+  unplugin@2.2.0:
+    dependencies:
+      acorn: 8.14.0
+      webpack-virtual-modules: 0.6.2
 
   untyped@1.4.2:
     dependencies:
