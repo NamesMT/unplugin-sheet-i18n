@@ -9,6 +9,6 @@
     "nodemon": "^3.1.7",
     "unplugin-sheet-i18n": "workspace:^",
     "vite": "^5.4.8",
-    "vite-plugin-inspect": "^0.8.7"
+    "vite-plugin-inspect": "^11.0.0"
   }
 }
