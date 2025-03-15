@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.15
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.14...v0.4.15)
+
+### 🏡 Chore
+
+- House keeping ([f04a56e](https://github.com/namesmt/unplugin-sheet-i18n/commit/f04a56e))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](https://github.com/NamesMT))
+
 ## v0.4.14
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.13...v0.4.14)
