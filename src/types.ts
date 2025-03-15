@@ -3,9 +3,9 @@ import type { FilterPattern } from 'vite'
 
 export interface Options {
   /**
-   * Default sheetI18n include i18n.csv file only,
+   * By default, sheetI18n scans for i18n.[cdt]sv files only,
    *
-   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cdt]sv|xls[xmb]?|ods)$/
+   * You could use this template to include spreadsheets: /(?:\/|\\|^)i18n\.(?:[cdt]sv|xls[xmb]?|[f]?ods)$/
    * 
    * @default /(?:\/|\\|^)i18n\.(?:[cdt]sv)$/
    */
@@ -31,7 +31,7 @@ export interface Options {
   keyStyle?: 'flat' | 'nested'
 
   /**
-   * Enable .xls[xmb]? and .ods support, multi-sheets is also supported,
+   * Enable .xls[xmb]? and .[f]?ods support, multi-sheets is also supported,
    *
    * ie: sheetI18n will merge all sheets into one
    * 
@@ -86,9 +86,11 @@ export interface Options {
   mergeOutput?: boolean
 
   /**
-   * Specify the output structure
+   * Specify the output structure when using `outDir`
    * 
    * Requires `outDir` to be configured
+   * 
+   * `'false'`: `/a/i18n.csv` => `/en.json`
    * 
    * `'parent'`: `/a/i18n.csv` => `/a/en.json`
    * 

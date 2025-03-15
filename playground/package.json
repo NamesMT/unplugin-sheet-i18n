@@ -6,9 +6,9 @@
     "dev": "nodemon -w '../src/**/*.ts' -w 'main.ts' -e .ts -x vite"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7",
+    "nodemon": "^3.1.9",
     "unplugin-sheet-i18n": "workspace:^",
-    "vite": "^5.4.8",
-    "vite-plugin-inspect": "^0.8.7"
+    "vite": "^6.2.2",
+    "vite-plugin-inspect": "^11.0.0"
   }
 }

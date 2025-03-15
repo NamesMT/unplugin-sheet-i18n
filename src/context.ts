@@ -33,8 +33,8 @@ export function createContext(options: Options = {}, root = process.cwd!()) {
   const filter = createFilter(resolvedOptions.include, resolvedOptions.exclude)
 
   const resolvedOutDir = resolvedOptions.outDir ? path.resolve(root, resolvedOptions.outDir) : null
-  const allowedExtensions = ['.csv', '.dsv']
-  const spreadsheetExtensions = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.ods']
+  const allowedExtensions = ['.csv', '.dsv', '.tsv']
+  const spreadsheetExtensions = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.ods', '.fods']
   if (resolvedOptions.xlsx)
     allowedExtensions.push(...spreadsheetExtensions)
 
