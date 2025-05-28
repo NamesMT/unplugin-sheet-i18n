@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.16
+
+[compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.15...v0.4.16)
+
+### 🏡 Chore
+
+- Deprecate note ([a51c668](https://github.com/namesmt/unplugin-sheet-i18n/commit/a51c668))
+
+### ❤️ Contributors
+
+- NamesMT ([@NamesMT](https://github.com/NamesMT))
+
 ## v0.4.15
 
 [compare changes](https://github.com/namesmt/unplugin-sheet-i18n/compare/v0.4.14...v0.4.15)
