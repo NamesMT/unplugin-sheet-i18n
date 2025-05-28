@@ -1,3 +1,11 @@
+<div align="center">
+
+<h1>Deprecated</h1>
+
+Use [**spreadsheet-i18n**](https://github.com/NamesMT/spreadsheet-i18n--mono/tree/main/libs/spreadsheet-i18n) or [**unplugin-spreadsheet-i18n**](https://github.com/NamesMT/spreadsheet-i18n--mono/tree/main/libs/unplugin-spreadsheet-i18n) instead.
+
+</div>
+
 # unplugin-sheet-i18n ![TypeScript heart icon](https://img.shields.io/badge/♡-%23007ACC.svg?logo=typescript&logoColor=white)
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -9,6 +17,7 @@
 **unplugin-sheet-i18n** enables doing your i18n in a [spread]sheet for a better collaborative experience with non-coders and maintainability.
 
 ## Features
+
 - Supports CSV, TSV, DSV, Excel/Spreadsheets (XLS[XMB], ODT), powered by [SheetJS](https://sheetjs.com/) and [papaparse](https://www.papaparse.com/)
 - File-to-file convert: `en.csv -> en.json`
 - File-to-multiple convert: `i18n.csv -> en.json, vi.json, fr.json,...`
@@ -18,9 +27,11 @@
 - And more!
 
 ## Usage
+
 [>See a few examples usage here<](./playground)
 
 ### Install package:
+
 ```sh
 # npm
 npm install unplugin-sheet-i18n
@@ -33,6 +44,7 @@ pnpm install unplugin-sheet-i18n
 ```
 
 ### Setup:
+
 <details>
 <summary>Vite</summary><br>
 
@@ -91,8 +103,6 @@ export default defineNuxtConfig({
   ],
 })
 ```
-
-> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
 
 <br></details>
 
@@ -164,6 +174,7 @@ createContext({
 <br></details>
 
 ### Options:
+
 [See Options](./src/types.ts)
 
 ## Roadmap
